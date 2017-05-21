@@ -1,0 +1,19 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #00b3be;
+  height: 48px;
+  width: 100%;
+
+  p{
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    line-height: 48px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,0 +1,36 @@
+.product-list{
+  padding: 0 0 48px;
+}
+.product-item{
+  margin: 0 0 23px;
+
+  strong{
+    display: block;
+    position: relative;
+    height: 50px;
+    padding: 0 40px 0 13px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+    background: #00b3be;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:after{
+      content: '';
+      position: absolute;
+      top: 17px;
+      right: 14px;
+      display: block;
+      height: 16px;
+      width: 24px;
+      background: url(./../../assets/img/ic-eye.png) no-repeat;
+      cursor: pointer;
+    }
+  }
+  img{
+    width: 100%;
+    height: auto;
+  }
+}

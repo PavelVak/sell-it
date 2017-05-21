@@ -1,0 +1,46 @@
+.product-detail-text{
+  P{
+    padding: 0 0 9px;
+  }
+  p, ul{
+    color: #4a4a4a;
+    font-size: 18px;
+  }
+  ul{
+    list-style: none;
+  }
+  li{
+    font-weight: bold;
+
+    &:before{
+      content:  "-";
+      position: relative;
+      left:     -5px;
+    }
+  }
+}
+.product-detail-header{
+  font-size: 32px;
+  line-height: 42px;
+  color: #000;
+}
+.product-detail-author{
+  font-weight: bold;
+  padding: 0 0 25px;
+
+  a{
+    color: #00b3be;
+    text-decoration: none;
+  }
+}
+.product-price{
+  color: #91d763;
+  font-size: 32px;
+}
+.uppercase-text{
+  text-transform: uppercase;
+}
+.product-detail-img{
+  width: 445px;
+  overflow: hidden;
+}

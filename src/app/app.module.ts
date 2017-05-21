@@ -28,6 +28,11 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
+import {HomePageComponent} from './home-page';
+import {LoginPageComponent} from './login-page';
+import {DetailPageComponent} from './detail-page';
+import {HeaderComponent} from './shared/components/header';
+import {FooterComponent} from './shared/components/footer';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -54,7 +59,12 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     NoContentComponent,
-    XLargeDirective
+    XLargeDirective,
+    HomePageComponent,
+    LoginPageComponent,
+    DetailPageComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   /**
    * Import Angular's modules.
