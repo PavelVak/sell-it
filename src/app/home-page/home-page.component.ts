@@ -7,5 +7,9 @@ import {Component} from "@angular/core";
 })
 
 export class HomePageComponent{
+  title: string = "Testing";
 
+  onclickHead(event){
+    console.log("click HEAD", event);
+  }
 }

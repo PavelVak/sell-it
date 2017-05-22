@@ -36,6 +36,7 @@ import {FooterComponent} from './shared/components/footer';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import {SharedModule} from "./shared/shared.module";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -63,8 +64,6 @@ type StoreType = {
     HomePageComponent,
     LoginPageComponent,
     DetailPageComponent,
-    HeaderComponent,
-    FooterComponent,
   ],
   /**
    * Import Angular's modules.
@@ -73,7 +72,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    SharedModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
