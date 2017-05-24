@@ -14,7 +14,7 @@ import { MockBackend } from '@angular/http/testing';
  */
 import { XLargeDirective } from './x-large.directive';
 
-describe('x-large directive', () => {
+describe('x-large directives', () => {
   /**
    * Create a test component to test directives.
    */

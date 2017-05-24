@@ -17,16 +17,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &:after{
-      content: '';
+    .fa-eye{
       position: absolute;
-      top: 17px;
+      top: 16px;
       right: 14px;
-      display: block;
-      height: 16px;
-      width: 24px;
-      background: url(./../../assets/img/ic-eye.png) no-repeat;
       cursor: pointer;
+      font-size: 18px;
     }
   }
   img{

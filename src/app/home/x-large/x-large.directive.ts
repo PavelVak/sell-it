@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 /**
  * Directive
- * XLarge is a simple directive to show how one is made
+ * XLarge is a simple directives to show how one is made
  */
 @Directive({
   selector: '[x-large]' // using [ ] means selecting attributes
