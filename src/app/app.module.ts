@@ -37,6 +37,7 @@ import {FooterComponent} from './shared/components/footer';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import {SharedModule} from "./shared/shared.module";
+import {UserService} from "./home-page/user.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -80,7 +81,8 @@ type StoreType = {
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    UserService
   ]
 })
 export class AppModule {
