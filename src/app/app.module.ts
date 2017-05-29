@@ -38,6 +38,8 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import {SharedModule} from "./shared/shared.module";
 import {UserService} from "./home-page/user.service";
+import {HttpService} from "./shared/services/http.service";
+import {ConstantsService} from "./shared/services/constants.sertice";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -82,7 +84,9 @@ type StoreType = {
   providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    UserService
+    UserService,
+    HttpService,
+    ConstantsService
   ]
 })
 export class AppModule {
