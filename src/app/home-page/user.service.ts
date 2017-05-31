@@ -1,18 +1,18 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import "rxjs/add/operator/map";
-import {User} from "./model";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { User } from './model';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class UserService{
+export class UserService {
 
   public searchEvent: Subject<any> = new Subject<any>();
 
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
-  public getUser(): Observable<User>{
+  public getUser(): Observable<User> {
     console.log('method getUser for userService');
     return this.http.get('assets/mock-data/user.json').map((data) => {
       let result = data.json();
@@ -20,7 +20,7 @@ export class UserService{
     });
   }
 
-  public getUsers(): Observable<User[]>{
+  public getUsers(): Observable<User[]> {
     console.log('method getUserSS for userService');
     return this.http.get('assets/mock-data/users.json').map((response) => {
       let result = [];
@@ -32,7 +32,7 @@ export class UserService{
     });
   }
 
-  public startSearch(data:any){
+  public startSearch(data: any) {
     this.searchEvent.next(data);
   }
 }

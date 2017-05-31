@@ -24,22 +24,19 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
-import {HomePageComponent} from './home-page';
-import {LoginPageComponent} from './login-page';
-import {DetailPageComponent} from './detail-page';
-import {HeaderComponent} from './shared/components/header';
-import {FooterComponent} from './shared/components/footer';
+import { HomePageComponent } from './home-page';
+import { LoginPageComponent } from './login-page';
+import { DetailPageComponent } from './detail-page';
+import { ProductListComponent } from './products/products-list/product-list.component';
+import { ProductItemComponent } from './products/product-item/product-item.component';
+
+import { SharedModule } from './shared/shared.module';
+import { UserService } from './home-page/user.service';
+import { HttpService } from './products/services/http.service';
+import { ConstantsService } from './products/services/http-config.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import {SharedModule} from "./shared/shared.module";
-import {UserService} from "./home-page/user.service";
-import {HttpService} from "./shared/services/http.service";
-import {ConstantsService} from "./shared/services/constants.sertice";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -60,13 +57,11 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    AboutComponent,
-    HomeComponent,
-    NoContentComponent,
-    XLargeDirective,
     HomePageComponent,
     LoginPageComponent,
     DetailPageComponent,
+    ProductListComponent,
+    ProductItemComponent
   ],
   /**
    * Import Angular's modules.

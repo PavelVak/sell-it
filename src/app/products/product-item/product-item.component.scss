@@ -1,0 +1,63 @@
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';
+
+.product-item{
+  margin: 0 0 23px;
+
+  strong{
+    display: block;
+    position: relative;
+    height: 50px;
+    padding: 0 40px 0 13px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+    background: #00b3be;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .fa-eye{
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+.product-img{
+  overflow: hidden;
+}
+
+@include media-breakpoint-only(xs) {
+  .product-img{
+    height: 150px;
+  }
+}
+@include media-breakpoint-only(sm) {
+  .product-img{
+    height: 150px;
+  }
+}
+@include media-breakpoint-only(md) {
+  .product-img{
+    height: 131px;
+  }
+}
+@include media-breakpoint-only(lg) {
+  .product-img{
+    height: 131px;
+
+  }
+}
+@include media-breakpoint-only(xl) {
+  .product-img{
+    height: 160px;
+
+  }
+}

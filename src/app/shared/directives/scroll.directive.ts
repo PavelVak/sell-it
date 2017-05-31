@@ -1,15 +1,15 @@
-import {Directive, HostListener} from "@angular/core";
+import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-  selector: "[scroll]"
+  selector: '[scroll]'
 })
 
-export class ScrollDirective{
-  constructor(){
-    console.log("Work it!!!");
+export class ScrollDirective {
+  constructor() {
+    console.log('Work it!!!');
   }
-  @HostListener("window:scroll", ["$event"])
-  public onScroll($event){
-    console.log("Scroll it", $event)
+  @HostListener('window:scroll', ['$event'])
+  public onScroll($event) {
+    console.log( 'Scroll it', $event );
   }
 }
