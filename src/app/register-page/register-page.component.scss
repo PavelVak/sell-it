@@ -1,0 +1,128 @@
+@import './../../styles/variables';
+@import './../../styles/my-mixin';
+
+.row.is-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.login-holder{
+  height: 100%;
+
+  .container{
+    height: 100%;
+  }
+  .is-flex{
+    min-height: 100%;
+    background: url('./../../assets/img/login-bg.png') 100% 100% no-repeat;
+    background-size: cover;
+  }
+}
+.login-block{
+  background: $primary-color;
+
+  .logo{
+    margin: 145px 0 105px;
+    padding: 0;
+    text-align: center;
+
+    a{
+      display: inline-block;
+      width: 198px;
+      height: 69px;
+      line-height: 1;
+    }
+  }
+  input[type=text],
+  input[type=password],
+  input[type=submit]{
+    display: block;
+    width: 100%;
+
+  }
+
+  input[type=text],
+  input[type=password]{
+    background: none;
+    border: none;
+    border-bottom: 3px solid #fff;
+    padding: 0 15px;
+    margin: 0 0 22px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+
+    &:focus{
+      outline: 0;
+    }
+
+    @include placeholder {
+      color: #fff;
+    }
+  }
+
+  .login-form{
+    flex: 1;
+    padding: 0 0 40px;
+    *:nth-last-child(2){
+      margin: 0 0 35px;
+    }
+  }
+
+  footer{
+    position: static;
+    p{
+      text-align: center;
+      color: #fff;
+    }
+  }
+}
+
+.btn{
+  border: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 14px;
+  color: #4a4a4a;
+  background: #f2f2f2;
+  height: 35px;
+  border-bottom: 3px solid #f2f2f2;
+  cursor: pointer;
+
+  &:focus{
+    outline: 0;
+    border-bottom-color: #91d763;
+  }
+}
+
+@media (max-width: 1200px){
+  .login-btn-group{
+    .btn{
+      display: block;
+      width: 100%;
+    }
+  }
+}
+.login-btn-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 0 70px;
+  .btn{
+    min-width: 150px;
+  }
+}
+

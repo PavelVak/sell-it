@@ -8,10 +8,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BtnScrollTopComponent } from './components/btnScrollTop/btnScrollTop.component';
 import { ScrollTopDirective } from './directives/scrollTop.directive';
 import { InfiniteScrollDirective } from './directives/infiniteScroll.directive';
+import {RouterModule} from "@angular/router";
+import {SHARED_ROUTES} from "./shared.routes";
 
 @NgModule({
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forChild(SHARED_ROUTES)
   ],
   declarations: [
     HeaderComponent,

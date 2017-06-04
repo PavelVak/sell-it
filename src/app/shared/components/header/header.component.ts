@@ -4,7 +4,7 @@ import {UserService} from "../../../home-page/user.service";
 
 
 @Component({
-  selector: 'header-of-page',
+  selector: 'sellit-header-of-page',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

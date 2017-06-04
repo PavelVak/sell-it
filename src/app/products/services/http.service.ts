@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Response, URLSearchParams} from '@angular/http';
-import {Item} from './Items';
+import {Item, ItemDetails} from './Items';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {ConstantsService} from './http-config.service';
+import {HttpConfigService} from './http-config.service';
 
 
 @Injectable()
@@ -13,8 +13,9 @@ export class HttpService {
   private limit: string = '16';
   private offset: number|string = 0;
   private search: string = '';
+  private id: number|string;
 
-  constructor(private http: Http, private consts: ConstantsService){ }
+  constructor(private http: Http, private httpConfigService: HttpConfigService){ }
 
   getItems(offset: number|string = 0): Observable<Item[]> {
     this.offset = offset;
@@ -23,7 +24,7 @@ export class HttpService {
     params.set('limit', this.limit);
     params.set('offset', <string>this.offset);
 
-    return this.http.get(this.consts.POSTERS_URL, {search: params})
+    return this.http.get(this.httpConfigService.POSTERS_URL, {search: params})
       .map((resp: Response) => {
 
         let itemsList = resp.json().results;
@@ -36,5 +37,25 @@ export class HttpService {
         }
         return items;
       });
+  }
+
+  getItem(id: number|string){
+      this.id = id;
+
+      return this.http.get(this.httpConfigService.POSTERS_URL + this.id)
+          .map((resp: Response) => {
+
+              let itemFromResp = resp.json();
+              let item: ItemDetails = new ItemDetails(
+                  itemFromResp.id,
+                  itemFromResp.title,
+                  itemFromResp.description,
+                  itemFromResp.author_details,
+                  itemFromResp.price,
+                  itemFromResp.photo_details
+              );
+              console.log('at getting');
+              return item;
+          });
   }
 }

@@ -9,3 +9,23 @@ export class Item {
     this.imageSrc = imageSrc;
   }
 }
+
+export class ItemDetails{
+  public id: number;
+  public title: string;
+  public description: string;
+  public author: any;
+  public price: string;
+  public photoDetails: any[];
+
+  constructor (id: number, title: string, description: string, author: any, price: string, photoDetails: any[]) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.author = author;
+    this.price = price;
+    this.photoDetails = photoDetails;
+    console.log('construct item');
+  }
+
+}

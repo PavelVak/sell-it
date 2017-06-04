@@ -1,6 +1,13 @@
 @import '~bootstrap/scss/_variables.scss';
 @import '~bootstrap/scss/_mixins.scss';
 
+a{
+  display: block;
+  
+  &:hover{
+    text-decoration: none;
+  }
+}
 .product-item{
   margin: 0 0 23px;
 

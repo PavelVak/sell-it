@@ -33,10 +33,14 @@ import { ProductItemComponent } from './products/product-item/product-item.compo
 import { SharedModule } from './shared/shared.module';
 import { UserService } from './home-page/user.service';
 import { HttpService } from './products/services/http.service';
-import { ConstantsService } from './products/services/http-config.service';
+import { HttpConfigService } from './products/services/http-config.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { NoContentPageComponent } from './nocontent-page/nocontent-page.component';
+import { ItemDetailResolver } from './products/services/detail.resolver';
+import { RegisterPageComponent } from './register-page/register-page.component';
+import { ChatModule } from './chat/chat.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -61,7 +65,9 @@ type StoreType = {
     LoginPageComponent,
     DetailPageComponent,
     ProductListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    NoContentPageComponent,
+    RegisterPageComponent
   ],
   /**
    * Import Angular's modules.
@@ -70,8 +76,9 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    SharedModule
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    SharedModule,
+    ChatModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -81,7 +88,8 @@ type StoreType = {
     APP_PROVIDERS,
     UserService,
     HttpService,
-    ConstantsService
+    HttpConfigService,
+    ItemDetailResolver
   ]
 })
 export class AppModule {
