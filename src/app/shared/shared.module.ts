@@ -10,11 +10,12 @@ import { ScrollTopDirective } from './directives/scrollTop.directive';
 import { InfiniteScrollDirective } from './directives/infiniteScroll.directive';
 import {RouterModule} from "@angular/router";
 import {SHARED_ROUTES} from "./shared.routes";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
-    BrowserModule,
-    RouterModule.forChild(SHARED_ROUTES)
+    CommonModule,
+    RouterModule
   ],
   declarations: [
     HeaderComponent,

@@ -78,7 +78,7 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     SharedModule,
-    ChatModule
+    ChatModule,
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
