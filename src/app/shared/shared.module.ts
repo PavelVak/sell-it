@@ -8,9 +8,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BtnScrollTopComponent } from './components/btnScrollTop/btnScrollTop.component';
 import { ScrollTopDirective } from './directives/scrollTop.directive';
 import { InfiniteScrollDirective } from './directives/infiniteScroll.directive';
-import {RouterModule} from "@angular/router";
-import {SHARED_ROUTES} from "./shared.routes";
-import {CommonModule} from "@angular/common";
+import { LengthValidDirective } from "./directives/length-validation.directive";
+import { FloatValidDirective } from "./directives/float-validator.directive";
+import { MatchPasswordDirective } from "./directives/match-password.directive";
+import { RouterModule } from "@angular/router";
+import { SHARED_ROUTES } from "./shared.routes";
+import { CommonModule } from "@angular/common";
+
 
 @NgModule({
   imports: [
@@ -24,7 +28,10 @@ import {CommonModule} from "@angular/common";
     FooterComponent,
     BtnScrollTopComponent,
     ScrollTopDirective,
-    InfiniteScrollDirective
+    InfiniteScrollDirective,
+    LengthValidDirective,
+    FloatValidDirective,
+    MatchPasswordDirective
   ],
   exports: [
     HeaderComponent,
@@ -33,7 +40,10 @@ import {CommonModule} from "@angular/common";
     FooterComponent,
     BtnScrollTopComponent,
     ScrollTopDirective,
-    InfiniteScrollDirective
+    InfiniteScrollDirective,
+    LengthValidDirective,
+    FloatValidDirective,
+    MatchPasswordDirective
   ]
 })
 export class SharedModule {

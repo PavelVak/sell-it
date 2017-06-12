@@ -41,6 +41,9 @@ import { NoContentPageComponent } from './nocontent-page/nocontent-page.componen
 import { ItemDetailResolver } from './products/services/detail.resolver';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatModule } from './chat/chat.module';
+import { AddProductPageComponent } from './add-product-page/add-product-page.component';
+import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -67,7 +70,9 @@ type StoreType = {
     ProductListComponent,
     ProductItemComponent,
     NoContentPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    AddProductPageComponent,
+    EditProfilePageComponent
   ],
   /**
    * Import Angular's modules.

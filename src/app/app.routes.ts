@@ -6,9 +6,12 @@ import { NoContentPageComponent } from './nocontent-page/nocontent-page.componen
 import { ItemDetailResolver } from './products/services/detail.resolver';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatComponent } from './chat/chat.component';
+import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {ModuleWithProviders} from "@angular/core";
+import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
+
 
 
 // import { DataResolver } from './app.resolver';
@@ -20,6 +23,8 @@ export const ROUTES: Routes = [
   { path: 'login', component: LoginPageComponent},
   { path: 'register', component: RegisterPageComponent},
   {path: 'chat', component: ChatComponent},
+  {path: 'add-product', component: AddProductPageComponent},
+  {path: 'edit-profile', component: EditProfilePageComponent},
   {path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'},
   { path: '**',    component: NoContentPageComponent }
 ];

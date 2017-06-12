@@ -1,0 +1,59 @@
+<sellit-header-of-page></sellit-header-of-page>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Add Product Page</h2>
+      <div *ngIf="submitted">
+        <h2>Thank You</h2>
+      </div>
+      <form (ngSubmit)="processForm()" *ngIf="!submitted" #productForm="ngForm">
+        <div class="form-group"
+             [ngClass]="{'has-error': title.invalid && title.dirty,
+                         'has-success': title.valid && title.dirty
+             }">
+            <label for="title">Title</label>
+            <input type="text" class="form-control"  lengthValidator
+                   [MaxLength]="20" name="title" id="title" required [(ngModel)]="product.title" #title="ngModel">
+            <span class="help-block" *ngIf="title.invalid && title.touched && !product.title">
+              title is required
+            </span>
+            <span class="help-block" *ngIf="title.invalid && title.dirty && product.title">
+              Exceeded the limit
+            </span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': description.invalid && description.dirty,
+                                            'has-success': description.valid && description.dirty}">
+          <label for="description">Description</label>
+          <textarea name="description" class="form-control" id="description" [(ngModel)]="product.description"
+                    #description="ngModel" lengthValidator
+                    [MaxLength]="300" (ngModelChange)="countRest()"></textarea>
+          <span class="help-block" *ngIf="!reachLimit">{{ this.restOfLength }} characters left</span>
+          <span class="help-block" *ngIf="reachLimit">Hey, dude, you have reached the limit!</span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': author.invalid && author.dirty,
+                                            'has-success': author.valid && author.dirty}">
+          <label for="author">Author</label>
+          <input type="text" class="form-control" name="author" id="author" required [(ngModel)]="product.author" #author="ngModel">
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': price.invalid && price.dirty,
+                                            'has-success': price.valid && price.dirty}">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" name="price" id="price" required [(ngModel)]="product.price" #price="ngModel" floatValidator>
+          <span class="help-block" *ngIf="price.invalid && price.dirty && product.price">
+              Not a number
+          </span>
+          <span class="help-block" *ngIf="price.invalid && price.dirty && !product.price">
+              This field is required
+          </span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': photo.invalid && photo.dirty,
+                                            'has-success': photo.valid && photo.dirty}">
+          <label for="title">Photo</label>
+          <input type="file" name="photo" id="photo" multiple accept="image/*,image/jpeg" [(ngModel)]="product.photo" #photo="ngModel">
+        </div>
+        <button type="submit" [disabled]="productForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<sellit-footer-of-page></sellit-footer-of-page>
