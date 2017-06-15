@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   NgModule,
@@ -79,6 +79,7 @@ type StoreType = {
    */
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),

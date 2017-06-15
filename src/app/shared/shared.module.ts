@@ -14,6 +14,7 @@ import { MatchPasswordDirective } from "./directives/match-password.directive";
 import { RouterModule } from "@angular/router";
 import { SHARED_ROUTES } from "./shared.routes";
 import { CommonModule } from "@angular/common";
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -31,13 +32,15 @@ import { CommonModule } from "@angular/common";
     InfiniteScrollDirective,
     LengthValidDirective,
     FloatValidDirective,
-    MatchPasswordDirective
+    MatchPasswordDirective,
+    ErrorComponent
   ],
   exports: [
     HeaderComponent,
     SearchComponent,
     UserPanelComponent,
     FooterComponent,
+    ErrorComponent,
     BtnScrollTopComponent,
     ScrollTopDirective,
     InfiniteScrollDirective,

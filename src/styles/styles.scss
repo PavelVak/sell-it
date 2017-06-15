@@ -3,12 +3,19 @@
 @import 'variables';
 @import 'my-mixin';
 @import 'bootstrap-grid';
+@import 'forms';
 
 html, body{
   height: 100%;
 }
 body{
   font-family: Arial;
+}
+h2{
+  color: $primary-text-color;
+  font:  bold 18px Arial;
+  padding: 0 0 10px;
+  text-align: center;
 }
 p{
   margin: 0;

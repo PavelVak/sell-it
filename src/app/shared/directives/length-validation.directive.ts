@@ -15,7 +15,7 @@ export class LengthValidDirective implements Validator {
   validate(control: AbstractControl): ValidationErrors | any {
     if (control.value && control.value.length > this.MaxLength - 1) {
       console.log('invalid');
-      return {invalid: true};
+      return {maxlength: true};
     }
     return null;
   }
