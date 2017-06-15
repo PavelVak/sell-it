@@ -43,6 +43,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatModule } from './chat/chat.module';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
+import { MyAuthService } from './core/myAuth.service';
 
 
 // Application wide providers
@@ -94,6 +95,7 @@ type StoreType = {
     APP_PROVIDERS,
     UserService,
     HttpService,
+    MyAuthService,
     HttpConfigService,
     ItemDetailResolver
   ]
