@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validationMessages } from '../shared/components/validationMessages';
+import { loginModel } from '../core/auth.model';
+import { MyAuthService } from '../core/myAuth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-page',
@@ -7,19 +11,38 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login-page.component.scss']
 })
 
-export class LoginPageComponent implements OnInit{
+export class LoginPageComponent implements OnInit {
+  public validationMessages = validationMessages;
   public loginForm: FormGroup;
+  public serverErrors: any[];
 
-  constructor (private fb: FormBuilder) {}
+  constructor (
+    private router: Router,
+    private fb: FormBuilder,
+    private myAuth: MyAuthService) {}
 
   public ngOnInit() {
     this.loginForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
-  public submitLoginForm() {
-    console.log(this.loginForm);
+  public submitRegisterForm() {
+    let data = this.loginForm.value;
+    this.myAuth.login(new loginModel(data.email, data.password)).subscribe(
+      (data) => {
+        console.log(`success: ${JSON.stringify(data)}`);
+        this.myAuth.currentUser(data);
+        this.myAuth.setCookie('Token', data['token']);
+
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        this.serverErrors = [];
+        this.serverErrors.push({key: 'Error from server', value: error});
+        console.log(error);
+      });
+
   }
 }

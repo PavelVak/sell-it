@@ -4,5 +4,5 @@ export const  validationMessages = {
   pattern: 'The value is  incorrect',
   customMaxLength: 'Hey Dude you have reached the limit',
   customFloat: 'The value should be a number',
-  match: 'Value don\'t match'
+  noMatch: 'Value don\'t match'
 };

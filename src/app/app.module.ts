@@ -15,6 +15,12 @@ import {
   PreloadAllModules
 } from '@angular/router';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/observable/throw';
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -43,7 +49,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatModule } from './chat/chat.module';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
-
+import { MyAuthService } from './core/myAuth.service';
+import { CookieModule } from 'ngx-cookie';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -83,6 +90,7 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    CookieModule.forRoot(),
     SharedModule,
     ChatModule,
   ],
@@ -94,6 +102,7 @@ type StoreType = {
     APP_PROVIDERS,
     UserService,
     HttpService,
+    MyAuthService,
     HttpConfigService,
     ItemDetailResolver
   ]

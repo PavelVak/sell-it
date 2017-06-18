@@ -7,14 +7,23 @@
             <img src="assets/img/logo-big.png" alt="logo">
           </a>
         </h1>
-        <form (ngSubmit)="submitLoginForm()" class="login-form" [formGroup]="loginForm">
-          <div class="login-btn-group">
-            <button class="btn">Sign In</button>
-            <button class="btn" routerLink="/register">Sign Up</button>
-          </div>
-          <input type="text" placeholder="Email" formControlName="email">
-          <input type="password" placeholder="Password" formControlName="password">
-          <input class="btn" type="submit" value="Login" >
+        <form class="login-form" (ngSubmit)="submitRegisterForm()" [formGroup]="loginForm">
+
+          <sellit-error [inputField]="loginForm.get('email')"
+                        [inputErrors]="loginForm.get('email').errors" [errorDefs]="validationMessages">
+            <input type="text" placeholder="Email" formControlName="email">
+          </sellit-error>
+
+          <sellit-error [inputField]="loginForm.get('password')"
+                        [inputErrors]="loginForm.get('password').errors" [errorDefs]="validationMessages">
+            <input type="password" placeholder="Password" formControlName="password">
+          </sellit-error>
+
+          <input class="btn" type="submit" value="Login">
+
+          <span  class="help-block" *ngFor="let serverError of serverErrors">
+            {{ serverError.key }} - {{ serverError.value }}
+          </span>
         </form>
         <footer>
           <p>Frontend labs 2017</p>

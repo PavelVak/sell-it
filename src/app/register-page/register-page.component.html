@@ -1,17 +1,41 @@
-<section class="login-holder">
+<section class="register-holder">
   <div class="container">
     <div class="row is-flex">
-      <div class="col-md-4 offset-md-8 login-block">
+      <div class="col-md-4 offset-md-8 register-block">
         <h1 class="logo">
           <a href="#">
             <img src="assets/img/logo-big.png" alt="logo">
           </a>
         </h1>
-        <form class="login-form" (ngSubmit)="submitRegicterForm()" [formGroup]="registerForm">
-          <input type="text" placeholder="Email" formControlName="email">
-          <input type="password" placeholder="Password" formControlName="password">
-          <input type="password" placeholder="Confirm password" formControlName="confirmPassword">
-          <input class="btn" type="submit" value="Register">
+        <form (ngSubmit)="submitRegisterForm($event)" class="register-form" [formGroup]="registerForm">
+          <div class="register-btn-group">
+            <button class="btn" routerLink="/login">Sign In</button>
+            <button class="btn" routerLink="/register">Sign Up</button>
+          </div>
+          <sellit-error [inputField]="registerForm.get('email')"
+                        [inputErrors]="registerForm.get('email').errors" [errorDefs]="validationMessages">
+            <input type="text" placeholder="Email" formControlName="email">
+          </sellit-error>
+
+          <sellit-error [inputField]="registerForm.get('username')"
+                        [inputErrors]="registerForm.get('username').errors" [errorDefs]="validationMessages">
+            <input type="text" placeholder="Username" formControlName="username">
+          </sellit-error>
+
+          <sellit-error [inputField]="registerForm.get('password')"
+                        [inputErrors]="registerForm.get('password').errors" [errorDefs]="validationMessages">
+            <input type="password" placeholder="Password" formControlName="password">
+          </sellit-error>
+
+          <sellit-error [inputField]="registerForm.get('confirmPassword')"
+                        [inputErrors]="registerForm.get('confirmPassword').errors" [errorDefs]="validationMessages">
+            <input type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+          </sellit-error>
+
+          <input class="btn" type="submit" value="Sign Up" [disabled]="!registerForm.valid">
+          <span class="help-block" *ngFor="let serverError of serverErrors">
+            {{ serverError.key }} - {{ serverError.value }}
+          </span>
         </form>
         <footer>
           <p>Frontend labs 2017</p>
