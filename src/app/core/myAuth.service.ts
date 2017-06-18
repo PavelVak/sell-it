@@ -23,6 +23,7 @@ export class MyAuthService {
   }
 
   public signUp(data: any) {
+
     let headers = new Headers();
     headers.append('Authorization', '123479');
 

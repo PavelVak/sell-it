@@ -43,6 +43,5 @@ export class LoginPageComponent implements OnInit {
         this.serverErrors.push({key: 'Error from server', value: error});
         console.log(error);
       });
-
   }
 }

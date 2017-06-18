@@ -7,6 +7,7 @@
             <img src="assets/img/logo-big.png" alt="logo">
           </a>
         </h1>
+
         <form class="login-form" (ngSubmit)="submitRegisterForm()" [formGroup]="loginForm">
 
           <sellit-error [inputField]="loginForm.get('email')"

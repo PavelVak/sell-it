@@ -17,7 +17,7 @@ export class loginModel {
                private password: string ) {}
 }
 
-export class UserModel{
+export class UserModel {
   constructor(public id: number,
               public firstName: string,
               public lastName: string,
