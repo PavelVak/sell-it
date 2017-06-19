@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { UserModel } from './auth.model';
-import { CookieService } from "ngx-cookie";
+import { CookieService } from 'ngx-cookie';
+import { SessionService } from './session.service';
+
 
 @Injectable()
 export class MyAuthService {
   public user: UserModel = new UserModel(null, '', '', '', '');
-  public isLogin: boolean = false;
+  //public isLogin: boolean = false;
 
   public API_URL: string = 'http://fe-kurs.light-it.net:38000';
   public API_URL_LOCAL: string = 'http://fe-kurs.light-it.loc:38000';
 
-  constructor(private http: Http, private cookieService: CookieService) {}
+  constructor(private http: Http, private cookieService: CookieService, private sessionService: SessionService) {}
 
   public setCookie(key: string, value: string) {
     this.cookieService.put(key, value);
@@ -28,13 +30,13 @@ export class MyAuthService {
     headers.append('Authorization', '123479');
 
     console.log('qdeasd', headers);
-    return this.http.post(this.API_URL + '/api/signup/', data, {headers: headers})
+    return this.http.post(this.API_URL_LOCAL + '/api/signup/', data, {headers: headers})
       .map((resp) => resp.json())
       .catch(this.handleError);
   }
 
   public login(data: any) {
-    return this.http.post(this.API_URL + '/api/login/', data)
+    return this.http.post(this.API_URL_LOCAL + '/api/login/', data)
       .map((resp) => resp.json())
       .catch(this.handleError);
   }
@@ -45,11 +47,16 @@ export class MyAuthService {
     this.user.lastName = '';
     this.user.email = '';
     this.user.username = '';
-    this.isLogin = false;
-    return this.http.post(this.API_URL + '/api/logout/', {})
+    //this.isLogin = false;
+    this.sessionService.token = '';
+    return this.http.post(this.API_URL_LOCAL + '/api/logout/', {})
       .map((resp) => resp.json())
       .catch(this.handleError);
 
+  }
+
+  public isLogin(){
+    return !!this.sessionService.token;
   }
 
   public currentUser(data: any){
@@ -58,7 +65,7 @@ export class MyAuthService {
     this.user.lastName = data.lastName || '';
     this.user.email = data.email;
     this.user.username = data.username;
-    this.isLogin = true;
+   // this.isLogin = true;
   }
 
   public getUser(){

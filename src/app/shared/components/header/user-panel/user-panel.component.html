@@ -1,5 +1,5 @@
 <div class="user-block">
-  <div class="user-block-not-authorized" *ngIf="!myAuth.isLogin; else isAuthorized">
+  <div class="user-block-not-authorized" *ngIf=" !isLogin; else isAuthorized">
     <p>Welcome, <a routerLink="/login">login</a> or <a routerLink="/register">register</a> for start !</p>
   </div>
   <ng-template #isAuthorized>

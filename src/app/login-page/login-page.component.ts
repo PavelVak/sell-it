@@ -4,6 +4,7 @@ import { validationMessages } from '../shared/components/validationMessages';
 import { loginModel } from '../core/auth.model';
 import { MyAuthService } from '../core/myAuth.service';
 import { Router } from '@angular/router';
+import { SessionService } from '../core/session.service';
 
 @Component({
   selector: 'login-page',
@@ -19,7 +20,8 @@ export class LoginPageComponent implements OnInit {
   constructor (
     private router: Router,
     private fb: FormBuilder,
-    private myAuth: MyAuthService) {}
+    private myAuth: MyAuthService,
+    private sessionService: SessionService) {}
 
   public ngOnInit() {
     this.loginForm = this.fb.group({
@@ -34,7 +36,8 @@ export class LoginPageComponent implements OnInit {
       (data) => {
         console.log(`success: ${JSON.stringify(data)}`);
         this.myAuth.currentUser(data);
-        this.myAuth.setCookie('Token', data['token']);
+        //this.myAuth.setCookie('Token', data['token']);
+        this.sessionService.token = data['token'];
 
         this.router.navigate(['/home']);
       },

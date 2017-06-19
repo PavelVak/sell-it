@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -51,6 +51,8 @@ import { AddProductPageComponent } from './add-product-page/add-product-page.com
 import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
 import { MyAuthService } from './core/myAuth.service';
 import { CookieModule } from 'ngx-cookie';
+import { ApiHttp } from './core/api-http.srvice';
+import { SessionService } from './core/session.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -104,7 +106,13 @@ type StoreType = {
     HttpService,
     MyAuthService,
     HttpConfigService,
-    ItemDetailResolver
+    ItemDetailResolver,
+    {
+      provide: Http,
+      useClass: ApiHttp,
+      deps: [XHRBackend, RequestOptions, SessionService]
+    },
+    SessionService
   ]
 })
 export class AppModule {

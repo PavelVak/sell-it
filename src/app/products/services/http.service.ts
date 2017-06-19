@@ -24,7 +24,7 @@ export class HttpService {
     params.set('limit', this.limit);
     params.set('offset', <string>this.offset);
 
-    return this.http.get(this.httpConfigService.POSTERS_URL, {search: params})
+    return this.http.get(this.httpConfigService.POSTERS_URL_LOCAL, {search: params})
       .map((resp: Response) => {
 
         let itemsList = resp.json().results;
@@ -42,7 +42,7 @@ export class HttpService {
   getItem(id: number|string){
       this.id = id;
 
-      return this.http.get(this.httpConfigService.POSTERS_URL + this.id)
+      return this.http.get(this.httpConfigService.POSTERS_URL_LOCAL + this.id)
           .map((resp: Response) => {
 
               let itemFromResp = resp.json();
