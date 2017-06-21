@@ -8,9 +8,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatComponent } from './chat/chat.component';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 
-import {UserProfileComponent} from './user-profile/user-profile.component';
-import {ModuleWithProviders} from "@angular/core";
-import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
+import {EditProfilePageComponent} from './edit-profile/edit-profile-page.component';
+import { CanActivateAuthGuard } from './core/guards/auth.guard';
+import { CanActivateNoAuthGuard} from  './core/guards/no-auth.guard';
 
 
 
@@ -20,11 +20,11 @@ export const ROUTES: Routes = [
   { path: '',      component: HomePageComponent},
   { path: 'home',  component: HomePageComponent},
   { path: 'detail/:id', component: DetailPageComponent, resolve: { itemDetails: ItemDetailResolver }},
-  { path: 'login', component: LoginPageComponent},
-  { path: 'register', component: RegisterPageComponent},
-  {path: 'chat', component: ChatComponent},
+  { path: 'login', component: LoginPageComponent, canActivate: [CanActivateAuthGuard]},
+  { path: 'register', component: RegisterPageComponent, canActivate: [CanActivateAuthGuard]},
+  {path: 'chat', component: ChatComponent, canActivate: [CanActivateNoAuthGuard]},
   {path: 'add-product', component: AddProductPageComponent},
-  {path: 'edit-profile', component: EditProfilePageComponent},
+  {path: 'edit-profile', component: EditProfilePageComponent, canActivate: [CanActivateNoAuthGuard]},
   {path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'},
   { path: '**',    component: NoContentPageComponent }
 ];

@@ -53,6 +53,9 @@ import { MyAuthService } from './core/myAuth.service';
 import { CookieModule } from 'ngx-cookie';
 import { ApiHttp } from './core/api-http.srvice';
 import { SessionService } from './core/session.service';
+import {CanActivateAuthGuard} from "./core/guards/auth.guard";
+import {CanActivateNoAuthGuard} from "./core/guards/no-auth.guard";
+import {EditUserService} from "./edit-profile/services/edit-user.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -112,7 +115,10 @@ type StoreType = {
       useClass: ApiHttp,
       deps: [XHRBackend, RequestOptions, SessionService]
     },
-    SessionService
+    SessionService,
+    CanActivateAuthGuard,
+    CanActivateNoAuthGuard,
+    EditUserService
   ]
 })
 export class AppModule {

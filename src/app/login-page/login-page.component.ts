@@ -20,8 +20,7 @@ export class LoginPageComponent implements OnInit {
   constructor (
     private router: Router,
     private fb: FormBuilder,
-    private myAuth: MyAuthService,
-    private sessionService: SessionService) {}
+    private myAuth: MyAuthService){}
 
   public ngOnInit() {
     this.loginForm = this.fb.group({
@@ -30,15 +29,12 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  public submitRegisterForm() {
+  public submitLoginForm() {
     let data = this.loginForm.value;
     this.myAuth.login(new loginModel(data.email, data.password)).subscribe(
       (data) => {
         console.log(`success: ${JSON.stringify(data)}`);
-        this.myAuth.currentUser(data);
-        //this.myAuth.setCookie('Token', data['token']);
-        this.sessionService.token = data['token'];
-
+        // this.myAuth.currentUser(data);
         this.router.navigate(['/home']);
       },
       (error) => {

@@ -7,22 +7,26 @@
         <h2>Thank You</h2>
       </div>
       <form (ngSubmit)="formSubmit()" [formGroup]="editForm" *ngIf="!submitted">
-        <div formGroupName="passwordGroup" class="inner-form-group"
-             [ngClass]="{'has-error': editForm.get('passwordGroup').errors}">
-          <sellit-error [labelText]="'Password'"  [inputField]="editForm.get('passwordGroup.password')"
-                        [inputErrors]="editForm.get('passwordGroup.password').errors" [errorDefs]="validationMessages">
-            <input class="form-control" type="password" placeholder="Password (required)" formControlName="password">
-          </sellit-error>
-          <sellit-error [labelText]="'Confirm Password'"  [inputField]="editForm.get('passwordGroup.confirmPassword')"
-                        [inputErrors]="editForm.get('passwordGroup.confirmPassword').errors" [errorDefs]="validationMessages">
-            <input class="form-control" type="confirmPassword" placeholder="Confirm password (required)" formControlName="confirmPassword">
-          </sellit-error>
-          <!--<span class="help-block" *ngIf="(editForm.get('passwordGroup.confirmPassword').touched ||-->
-                                           <!--editForm.get('passwordGroup.confirmPassword').dirty) &&-->
-                                           <!--editForm.get('passwordGroup').errors">-->
-            <!--Passwords do not match-->
-          <!--</span>-->
-        </div>
+        <sellit-error [labelText]="'Photo'"  [inputField]="editForm.get('photo')"
+                      [inputErrors]="editForm.get('photo').errors" [errorDefs]="validationMessages">
+          <div class="file-container">
+            Click here to upload the file
+            <input type="file" accept="image/*" formControlName="photo" (change)="addPhoto($event)">
+          </div>
+        </sellit-error>
+
+        <!--<div formGroupName="passwordGroup" class="inner-form-group"-->
+             <!--[ngClass]="{'has-error': editForm.get('passwordGroup').errors}">-->
+          <!--<sellit-error [labelText]="'Password'"  [inputField]="editForm.get('passwordGroup.password')"-->
+                        <!--[inputErrors]="editForm.get('passwordGroup.password').errors" [errorDefs]="validationMessages">-->
+            <!--<input class="form-control" type="password" placeholder="Password (required)" formControlName="password">-->
+          <!--</sellit-error>-->
+          <!--<sellit-error [labelText]="'Confirm Password'"  [inputField]="editForm.get('passwordGroup.confirmPassword')"-->
+                        <!--[inputErrors]="editForm.get('passwordGroup.confirmPassword').errors" [errorDefs]="validationMessages">-->
+            <!--<input class="form-control" type="confirmPassword" placeholder="Confirm password (required)" formControlName="confirmPassword">-->
+          <!--</sellit-error>-->
+        <!--</div>-->
+
         <div class="form-group btn-group">
           <span>
              <button class="btn" type="submit" [disabled]="!editForm.valid">Submit</button>

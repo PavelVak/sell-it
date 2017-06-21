@@ -8,8 +8,7 @@ import { SessionService } from './session.service';
 
 @Injectable()
 export class MyAuthService {
-  public user: UserModel = new UserModel(null, '', '', '', '');
-  //public isLogin: boolean = false;
+  public user: UserModel = new UserModel(null, '', '', '', '', null);
 
   public API_URL: string = 'http://fe-kurs.light-it.net:38000';
   public API_URL_LOCAL: string = 'http://fe-kurs.light-it.loc:38000';
@@ -28,28 +27,31 @@ export class MyAuthService {
 
     let headers = new Headers();
     headers.append('Authorization', '123479');
-
-    console.log('qdeasd', headers);
-    return this.http.post(this.API_URL_LOCAL + '/api/signup/', data, {headers: headers})
+    return this.http.post(this.API_URL + '/api/signup/', data, {headers: headers})
       .map((resp) => resp.json())
       .catch(this.handleError);
   }
 
   public login(data: any) {
-    return this.http.post(this.API_URL_LOCAL + '/api/login/', data)
-      .map((resp) => resp.json())
+    return this.http.post(this.API_URL + '/api/login/', data)
+      .map((resp) => {
+        resp = resp.json();
+        this.sessionService.token = resp['token'];
+        let user = new UserModel(resp['id'], resp['first_name'], resp['last_name'], resp['email'], resp['username'], resp['photo']);
+        this.sessionService.currentUser = user;
+        localStorage.setItem('user', JSON.stringify(user));
+        console.log('Current User: ', this.sessionService.currentUser);
+        return resp;
+      })
       .catch(this.handleError);
   }
 
   public logout() {
-    this.user.id = null;
-    this.user.firstName = '';
-    this.user.lastName = '';
-    this.user.email = '';
-    this.user.username = '';
-    //this.isLogin = false;
+    this.sessionService.currentUser = new UserModel(null, '', '', '', '', null);
+    localStorage.removeItem('user');
+    console.log('Current User logout: ', this.sessionService.currentUser);
     this.sessionService.token = '';
-    return this.http.post(this.API_URL_LOCAL + '/api/logout/', {})
+    return this.http.post(this.API_URL + '/api/logout/', {})
       .map((resp) => resp.json())
       .catch(this.handleError);
 
@@ -68,9 +70,6 @@ export class MyAuthService {
    // this.isLogin = true;
   }
 
-  public getUser(){
-    return this.user;
-  }
 
   /*handle any errors from the APi*/
   private handleError(err) {
