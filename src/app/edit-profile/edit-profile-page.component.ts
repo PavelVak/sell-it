@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { validationMessages } from '../shared/components/validationMessages';
 import { EditUserService } from "./services/edit-user.service";
+import { ProfileService } from '../core/profile.service';
 
 // function testValidator(param: any): ValidatorFn {
 //   return (c: AbstractControl) : {[key: string]: boolean} | null => {
@@ -28,13 +29,21 @@ import { EditUserService } from "./services/edit-user.service";
   styleUrls: ['./edit-profile-page.component.scss']
 })
 export class EditProfilePageComponent implements OnInit {
+  currentUser;
   public editForm: FormGroup;
   public validationMessages = validationMessages;
   public submitted: boolean = false;
   file: any;
-  constructor (private fb: FormBuilder, private editUserService: EditUserService) {}
+  constructor (private fb: FormBuilder,
+               private editUserService: EditUserService,
+               private profileService: ProfileService) {}
 
   public ngOnInit() {
+    this.profileService.myLoadUser().then(data => {
+      console.log(data);
+      return this.currentUser = data;
+    });
+
     this.editForm = this.fb.group({
       photo: [''],
       // passwordGroup: this.fb.group({
@@ -51,11 +60,14 @@ export class EditProfilePageComponent implements OnInit {
 
   public formSubmit() {
     this.submitted = true;
-    this.editUserService.updatePhoto(this.file[0]).subscribe((data) => {
-      let photoId = data[0]['id'];
-      this.editUserService.updateUserPhoto(photoId).subscribe((data) => data);
-      return data;
-    });
+    this.profileService.myUpdatePhoto(this.currentUser.id, this.file[0])
+      .then(data => console.log('data from component: ', data));
+
+    // this.editUserService.updatePhoto(this.file[0]).subscribe((data) => {
+    //   let photoId = data[0]['id'];
+    //   this.editUserService.updateUserPhoto(photoId).subscribe((data) => data);
+    //   return data;
+    // });
 
 
   }

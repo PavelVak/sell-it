@@ -5,7 +5,8 @@ import {SessionService} from "../../core/session.service";
 
 @Injectable()
 export class EditUserService {
-  url = 'http://fe-kurs.light-it.net:38000';
+  url = 'http://fe-kurs.light-it.loc:38000';
+
 
   constructor (private http: Http, private sessionService: SessionService) {}
 

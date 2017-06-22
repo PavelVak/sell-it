@@ -48,14 +48,15 @@ import { ItemDetailResolver } from './products/services/detail.resolver';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatModule } from './chat/chat.module';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
-import {EditProfilePageComponent} from "./edit-profile/edit-profile-page.component";
+import {EditProfilePageComponent} from './edit-profile/edit-profile-page.component';
 import { MyAuthService } from './core/myAuth.service';
 import { CookieModule } from 'ngx-cookie';
 import { ApiHttp } from './core/api-http.srvice';
 import { SessionService } from './core/session.service';
-import {CanActivateAuthGuard} from "./core/guards/auth.guard";
-import {CanActivateNoAuthGuard} from "./core/guards/no-auth.guard";
-import {EditUserService} from "./edit-profile/services/edit-user.service";
+import {CanActivateAuthGuard} from './core/guards/auth.guard';
+import {CanActivateNoAuthGuard} from './core/guards/no-auth.guard';
+import {EditUserService} from './edit-profile/services/edit-user.service';
+import { ProfileService } from './core/profile.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -118,7 +119,8 @@ type StoreType = {
     SessionService,
     CanActivateAuthGuard,
     CanActivateNoAuthGuard,
-    EditUserService
+    EditUserService,
+    ProfileService
   ]
 })
 export class AppModule {

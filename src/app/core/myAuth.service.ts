@@ -27,13 +27,13 @@ export class MyAuthService {
 
     let headers = new Headers();
     headers.append('Authorization', '123479');
-    return this.http.post(this.API_URL + '/api/signup/', data, {headers: headers})
+    return this.http.post(this.API_URL_LOCAL + '/api/signup/', data, {headers: headers})
       .map((resp) => resp.json())
       .catch(this.handleError);
   }
 
   public login(data: any) {
-    return this.http.post(this.API_URL + '/api/login/', data)
+    return this.http.post(this.API_URL_LOCAL + '/api/login/', data)
       .map((resp) => {
         resp = resp.json();
         this.sessionService.token = resp['token'];
@@ -51,7 +51,7 @@ export class MyAuthService {
     localStorage.removeItem('user');
     console.log('Current User logout: ', this.sessionService.currentUser);
     this.sessionService.token = '';
-    return this.http.post(this.API_URL + '/api/logout/', {})
+    return this.http.post(this.API_URL_LOCAL + '/api/logout/', {})
       .map((resp) => resp.json())
       .catch(this.handleError);
 

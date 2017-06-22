@@ -4,7 +4,7 @@
   </div>
   <ng-template #isAuthorized>
     <div class="user-block-authorized">
-        <span class="user-profile-link" (click)="toggleUserMenu()"><img [src]="'http://fe-kurs.light-it.net:38000'+user.photo['photo']" alt=""></span>
+        <span class="user-profile-link" (click)="toggleUserMenu()"><img [src]="'http://fe-kurs.light-it.loc:38000'+user?.photo['photo']" alt=""></span>
         <span class="user-name">{{user.username}}</span>
         <span class="user-sign-out-link fa fa-sign-out" (click)="logOut()">&nbsp;</span>
     </div>

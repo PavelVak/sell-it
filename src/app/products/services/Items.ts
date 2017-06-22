@@ -8,6 +8,10 @@ export class Item {
     this.title = title;
     this.imageSrc = imageSrc;
   }
+
+  // get firstImg() {
+  //   return this.imageSrc.length > 0 ? this.imageSrc[0] : '';
+  // }
 }
 
 export class ItemDetails{
