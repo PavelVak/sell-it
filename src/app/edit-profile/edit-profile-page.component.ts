@@ -4,16 +4,16 @@ import { validationMessages } from '../shared/components/validationMessages';
 import { EditUserService } from "./services/edit-user.service";
 import { ProfileService } from '../core/profile.service';
 
-// function testValidator(param: any): ValidatorFn {
-//   return (c: AbstractControl) : {[key: string]: boolean} | null => {
-//     let parent = c.parent;
-//     if (!parent) { return null; }
-//     let passwordControl = parent.get(param);
-//     let confirmPassword = c;
-//     if (confirmPassword.value !== passwordControl.value) return {noMatch: true};
-//     return null;
-//   };
-// }
+function PasswordValidator(param: any): ValidatorFn {
+  return (c: AbstractControl) : {[key: string]: boolean} | null => {
+    let parent = c.parent;
+    if (!parent) { return null; }
+    let passwordControl = parent.get(param);
+    let confirmPassword = c;
+    if (confirmPassword.value !== passwordControl.value) return {noMatch: true};
+    return null;
+  };
+}
 // function passwordMatcher(c: AbstractControl){
 //   let passwordControl = c.get('password');
 //   let confirmControl = c.get('confirmPassword');
@@ -23,19 +23,30 @@ import { ProfileService } from '../core/profile.service';
 //   return { 'match': true};
 // }
 
+
 @Component({
   selector: 'sellit-edit-profile-page',
   templateUrl: './edit-profile-page.component.html',
   styleUrls: ['./edit-profile-page.component.scss']
 })
 export class EditProfilePageComponent implements OnInit {
-  currentUser;
-  public editForm: FormGroup;
+  public currentUser;
+  public changePhoto: boolean = true;
+  public changePhotoForm: FormGroup;
+  public changePasswordForm: FormGroup;
   public validationMessages = validationMessages;
-  public submitted: boolean = false;
+  public submittedChangePhoto: boolean = false;
+  public submittedChangePassword: boolean = false;
+  public serverErrors: any[];
   file: any;
+
+  private labelsError = {
+    new_password1: 'New Password',
+    new_password2: 'Confirm New Password',
+    old_password: 'Old Password'
+  };
+
   constructor (private fb: FormBuilder,
-               private editUserService: EditUserService,
                private profileService: ProfileService) {}
 
   public ngOnInit() {
@@ -44,22 +55,27 @@ export class EditProfilePageComponent implements OnInit {
       return this.currentUser = data;
     });
 
-    this.editForm = this.fb.group({
-      photo: [''],
-      // passwordGroup: this.fb.group({
-      //   password: ['', [Validators.required]],
-      //   confirmPassword: ['',[Validators.required, testValidator('password')]]
-      // })
+    this.changePhotoForm = this.fb.group({
+      photo: ['']
+    });
+
+    this.changePasswordForm = this.fb.group({
+      passwordGroup: this.fb.group({
+        oldPassword: ['', [Validators.required]],
+        password: ['', [Validators.required]],
+        confirmPassword: ['',[Validators.required, PasswordValidator('password')]]
+      })
     });
   }
 
   addPhoto(event) {
     let target = event.target || event.srcElement;
     this.file = target.files;
+
   }
 
-  public formSubmit() {
-    this.submitted = true;
+  public formPhotoSubmit() {
+    this.submittedChangePhoto = true;
     this.profileService.myUpdatePhoto(this.currentUser.id, this.file[0])
       .then(data => console.log('data from component: ', data));
 
@@ -69,6 +85,28 @@ export class EditProfilePageComponent implements OnInit {
     //   return data;
     // });
 
+  }
 
+  public formPasswordSubmit() {
+    let data = {
+      new_password1: this.changePasswordForm.get('passwordGroup.password').value,
+      new_password2: this.changePasswordForm.get('passwordGroup.confirmPassword').value,
+      old_password: this.changePasswordForm.get('passwordGroup.oldPassword').value
+    };
+    this.profileService.myChangePassword(data).subscribe(
+      data => { this.submittedChangePassword = true},
+      (error) => {
+        this.serverErrors = [];
+        Object.keys(error).map((item) => {
+          return this.serverErrors.push({key: this.labelsError[item], value: error[item].join(' ')});
+        });
+        console.log(this.serverErrors);
+
+      });
+
+  }
+
+  toggleState(value){
+    this.changePhoto = value == 'photo'
   }
 }

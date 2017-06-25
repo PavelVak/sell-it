@@ -1,7 +1,7 @@
 @import 'variables';
 
 form{
-  padding: 0 0 40px;
+  padding: 0 0 20px;
 }
 
 input, textarea, button{
@@ -98,4 +98,13 @@ label {
 
 .inner-form-group{
   position: relative;
+}
+.form-group.btn-group.btn-head-group{
+  justify-content: flex-start;
+  span{
+    margin: 0 0 0 15px;
+  }
+  span:first-child{
+    margin: 0;
+  }
 }

@@ -15,7 +15,9 @@ export class HttpService {
   private search: string = '';
   private id: number|string;
 
-  constructor(private http: Http, private httpConfigService: HttpConfigService){ }
+  constructor(
+    private http: Http,
+    private httpConfigService: HttpConfigService){ }
 
   getItems(offset: number|string = 0): Observable<Item[]> {
     this.offset = offset;
@@ -24,7 +26,7 @@ export class HttpService {
     params.set('limit', this.limit);
     params.set('offset', <string>this.offset);
 
-    return this.http.get(this.httpConfigService.POSTERS_URL_LOCAL, {search: params})
+    return this.http.get(this.httpConfigService.API_POSTER, {search: params})
       .map((resp: Response) => {
 
         let itemsList = resp.json().results;
@@ -42,7 +44,7 @@ export class HttpService {
   getItem(id: number|string){
       this.id = id;
 
-      return this.http.get(this.httpConfigService.POSTERS_URL_LOCAL + this.id)
+      return this.http.get(this.httpConfigService.API_POSTER + this.id)
           .map((resp: Response) => {
 
               let itemFromResp = resp.json();
@@ -57,5 +59,25 @@ export class HttpService {
               console.log('at getting');
               return item;
           });
+  }
+
+  loadProductPhoto(photos): Observable<any>{
+    const formData = new FormData();
+    for (let photo of photos) {
+      formData.append('photo', photo);
+    }
+    return this.http.post(this.httpConfigService.API_PHOTO, formData)
+      .map((resp) => {
+        resp = resp.json();
+        return resp;
+      })
+  }
+
+  CreateProduct(productData){
+    return this.http.post(this.httpConfigService.API_POSTER, productData)
+      .map((resp) => {
+        resp = resp.json();
+        return resp;
+      })
   }
 }

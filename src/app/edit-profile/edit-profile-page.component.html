@@ -1,43 +1,71 @@
-<sellit-header-of-page></sellit-header-of-page>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h2>Add Product Page</h2>
-      <div *ngIf="submitted">
-        <h2>Thank You</h2>
-      </div>
-      <form (ngSubmit)="formSubmit()" [formGroup]="editForm" *ngIf="!submitted">
-        <sellit-error [labelText]="'Photo'"  [inputField]="editForm.get('photo')"
-                      [inputErrors]="editForm.get('photo').errors" [errorDefs]="validationMessages">
-          <div class="file-container">
-            Click here to upload the file
-            <input type="file" accept="image/*" formControlName="photo" (change)="addPhoto($event)">
-          </div>
-        </sellit-error>
-
-        <!--<div formGroupName="passwordGroup" class="inner-form-group"-->
-             <!--[ngClass]="{'has-error': editForm.get('passwordGroup').errors}">-->
-          <!--<sellit-error [labelText]="'Password'"  [inputField]="editForm.get('passwordGroup.password')"-->
-                        <!--[inputErrors]="editForm.get('passwordGroup.password').errors" [errorDefs]="validationMessages">-->
-            <!--<input class="form-control" type="password" placeholder="Password (required)" formControlName="password">-->
-          <!--</sellit-error>-->
-          <!--<sellit-error [labelText]="'Confirm Password'"  [inputField]="editForm.get('passwordGroup.confirmPassword')"-->
-                        <!--[inputErrors]="editForm.get('passwordGroup.confirmPassword').errors" [errorDefs]="validationMessages">-->
-            <!--<input class="form-control" type="confirmPassword" placeholder="Confirm password (required)" formControlName="confirmPassword">-->
-          <!--</sellit-error>-->
-        <!--</div>-->
-
-        <div class="form-group btn-group">
+<div class="wrapper">
+  <sellit-header-of-page></sellit-header-of-page>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2>Edit Profile Page</h2>
+        <div class="form-group btn-group btn-head-group">
+        <span>
+          <button class="btn" type="submit" (click)="toggleState('photo')">Change Photo</button>
+        </span>
           <span>
-             <button class="btn" type="submit" [disabled]="!editForm.valid">Submit</button>
-          </span>
+          <button class="btn" type="submit" (click)="toggleState('password')">Change Password</button>
+        </span>
         </div>
-      </form>
-      <!--<p>Dirty: {{addProductForm.dirty}}</p>-->
-      <!--<p>Touched: {{addProductForm.touched}}</p>-->
-      <!--<p>Valid: {{addProductForm.valid}}</p>-->
-      <!--<p>Value: {{addProductForm.value | json}}</p>-->
+        <div *ngIf="changePhoto; else changePassword">
+          <div *ngIf="submittedChangePhoto">
+            <h2>Thank You</h2>
+          </div>
+          <form (ngSubmit)="formPhotoSubmit()" [formGroup]="changePhotoForm" *ngIf="!submittedChangePhoto">
+            <sellit-error [labelText]="'Photo'"  [inputField]="changePhotoForm.get('photo')"
+                          [inputErrors]="changePhotoForm.get('photo').errors" [errorDefs]="validationMessages">
+              <div class="file-container">
+                Click here to upload the file
+                <input type="file" accept="image/*" formControlName="photo" (change)="addPhoto($event)">
+              </div>
+            </sellit-error>
+            <div class="form-group btn-group">
+            <span>
+               <button class="btn" type="submit" [disabled]="!changePhotoForm.valid">Submit</button>
+            </span>
+            </div>
+          </form>
+        </div>
+
+        <ng-template #changePassword>
+          <div *ngIf="submittedChangePassword">
+            <h2>Thank You</h2>
+          </div>
+          <form class="change-password-form" (ngSubmit)="formPasswordSubmit()" [formGroup]="changePasswordForm" *ngIf="!submittedChangePassword">
+            <div formGroupName="passwordGroup" class="inner-form-group"
+                 [ngClass]="{'has-error': changePasswordForm.get('passwordGroup').errors}">
+              <sellit-error [labelText]="'Old Password'"  [inputField]="changePasswordForm.get('passwordGroup.oldPassword')"
+                            [inputErrors]="changePasswordForm.get('passwordGroup.oldPassword').errors" [errorDefs]="validationMessages">
+                <input class="form-control" type="password" placeholder="Old Password (required)" formControlName="oldPassword">
+              </sellit-error>
+              <sellit-error [labelText]="'Password'"  [inputField]="changePasswordForm.get('passwordGroup.password')"
+                            [inputErrors]="changePasswordForm.get('passwordGroup.password').errors" [errorDefs]="validationMessages">
+                <input class="form-control" type="password" placeholder="New Password (required)" formControlName="password">
+              </sellit-error>
+              <sellit-error [labelText]="'Confirm Password'"  [inputField]="changePasswordForm.get('passwordGroup.confirmPassword')"
+                            [inputErrors]="changePasswordForm.get('passwordGroup.confirmPassword').errors" [errorDefs]="validationMessages">
+                <input class="form-control" type="password" placeholder="Confirm New Password (required)" formControlName="confirmPassword">
+              </sellit-error>
+            </div>
+            <div class="form-group btn-group">
+            <span>
+               <button class="btn" type="submit" [disabled]="!changePasswordForm.valid">Submit</button>
+            </span>
+            </div>
+            <span class="help-block" *ngFor="let serverError of serverErrors">
+              {{ serverError.key }} - {{ serverError.value }}
+            </span>
+          </form>
+
+        </ng-template>
+      </div>
     </div>
   </div>
+  <sellit-footer-of-page></sellit-footer-of-page>
 </div>
-<sellit-footer-of-page></sellit-footer-of-page>
+

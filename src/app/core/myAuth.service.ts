@@ -4,16 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import { UserModel } from './auth.model';
 import { CookieService } from 'ngx-cookie';
 import { SessionService } from './session.service';
+import { HttpConfigService } from '../products/services/http-config.service';
 
 
 @Injectable()
 export class MyAuthService {
   public user: UserModel = new UserModel(null, '', '', '', '', null);
 
-  public API_URL: string = 'http://fe-kurs.light-it.net:38000';
-  public API_URL_LOCAL: string = 'http://fe-kurs.light-it.loc:38000';
-
-  constructor(private http: Http, private cookieService: CookieService, private sessionService: SessionService) {}
+  constructor(private http: Http,
+              private httpConfigService: HttpConfigService,
+              private cookieService: CookieService,
+              private sessionService: SessionService) {}
 
   public setCookie(key: string, value: string) {
     this.cookieService.put(key, value);
@@ -27,13 +28,13 @@ export class MyAuthService {
 
     let headers = new Headers();
     headers.append('Authorization', '123479');
-    return this.http.post(this.API_URL_LOCAL + '/api/signup/', data, {headers: headers})
+    return this.http.post(this.httpConfigService.API_SIGNUP, data, {headers: headers})
       .map((resp) => resp.json())
       .catch(this.handleError);
   }
 
   public login(data: any) {
-    return this.http.post(this.API_URL_LOCAL + '/api/login/', data)
+    return this.http.post(this.httpConfigService.API_LOGIN, data)
       .map((resp) => {
         resp = resp.json();
         this.sessionService.token = resp['token'];
@@ -51,7 +52,7 @@ export class MyAuthService {
     localStorage.removeItem('user');
     console.log('Current User logout: ', this.sessionService.currentUser);
     this.sessionService.token = '';
-    return this.http.post(this.API_URL_LOCAL + '/api/logout/', {})
+    return this.http.post(this.httpConfigService.API_LOGOUT, {})
       .map((resp) => resp.json())
       .catch(this.handleError);
 
