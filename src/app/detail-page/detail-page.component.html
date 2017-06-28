@@ -2,32 +2,72 @@
 <section class="product-detail-block" style="padding: 0 0 100px;">
   <div class="container">
     <div class="row">
-      <div class="col-lg-5 offset-lg-1">
-        <div class="product-detail-img">
-            <img src="{{item.photoDetails[0]['photo']}}" alt="">
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <div class="product-detail-text">
-          <h2 class="product-detail-header">{{item.title}}</h2>
-          <p class="product-detail-author">from <a href="#">{{item.author.username}}</a> <span class="product-price">{{item.price}} $</span></p>
-          <p class="product-detail-description">{{item.description}}</p>
-          <p>Can be <strong class="uppercase-text">bold</strong> <i>Italic</i></p>
-          <p><strong>Can have  list:</strong></p>
-          <ul>
-            <li>first</li>
-            <li>second</li>
-          </ul>
-          <p><strong>And anything from <span class="uppercase-text">WYSIWYG</span> editor</strong></p>
-          <div>
-            <p><strong>Some line</strong></p>
-            <p>Some line</p>
-            <p><i>Some line</i></p>
-          </div>
-          <p><strong>Finished on this line.</strong></p>
-        </div>
+      <div class="col-2 offset-10" *ngIf="checkedId">
+        <span class="pencil" (click)="toggleEditProduct()">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </span>
       </div>
     </div>
+    <div class="row" *ngIf="toggleEdit; else productDetail">
+      <div class="col-md-6 offset-md-3">
+        <form (ngSubmit)="formSubmit(); editProductForm.reset()" [formGroup]="editProductForm" *ngIf="!submitted">
+        <sellit-error [labelText]="'Title'"  [inputField]="editProductForm.get('title')"
+                      [inputErrors]="editProductForm.get('title').errors" [errorDefs]="validationMessages">
+          <input class="form-control" type="text" placeholder="Title (required)" formControlName="title">
+        </sellit-error>
+        <sellit-error [labelText]="'Description'"  [inputField]="editProductForm.get('description')"
+                      [inputErrors]="editProductForm.get('description').errors" [errorDefs]="validationMessages">
+          <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+          <span class="help-block" *ngIf="!reachLimit">{{ this.restOfLength }} characters left</span>
+        </sellit-error>
+        <sellit-error [labelText]="'Price'"  [inputField]="editProductForm.get('price')"
+                      [inputErrors]="editProductForm.get('price').errors" [errorDefs]="validationMessages">
+          <input class="form-control" type="text" placeholder="Price (required)" formControlName="price">
+        </sellit-error>
+        <sellit-error [labelText]="'Photo'"  [inputField]="editProductForm.get('photo')"
+                      [inputErrors]="editProductForm.get('photo').errors" [errorDefs]="validationMessages">
+          <div class="file-container">
+            Click here to upload the file
+            <input type="file" multiple accept="image/*" formControlName="photo" (change)="addPhoto($event)">
+          </div>
+        </sellit-error>
+        <div class="form-group btn-group">
+          <span>
+             <button class="btn" type="submit" [disabled]="!editProductForm.valid">Submit</button>
+          </span>
+        </div>
+      </form>
+      </div>
+    </div>
+    <ng-template #productDetail>
+      <div class="row">
+        <div class="col-lg-5 offset-lg-1">
+          <div class="product-detail-img">
+            <img *ngIf="item.photoDetails.length > 0" src="{{item.photoDetails[0]['photo']}}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="product-detail-text">
+            <h2 class="product-detail-header">{{item.title}}</h2>
+            <p class="product-detail-author">from <a href="#">{{item.author.username}}</a> <span class="product-price">{{item.price}} $</span></p>
+            <p class="product-detail-description">{{item.description}}</p>
+            <p>Can be <strong class="uppercase-text">bold</strong> <i>Italic</i></p>
+            <p><strong>Can have  list:</strong></p>
+            <ul>
+              <li>first</li>
+              <li>second</li>
+            </ul>
+            <p><strong>And anything from <span class="uppercase-text">WYSIWYG</span> editor</strong></p>
+            <div>
+              <p><strong>Some line</strong></p>
+              <p>Some line</p>
+              <p><i>Some line</i></p>
+            </div>
+            <p><strong>Finished on this line.</strong></p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </section>
 <sellit-chat></sellit-chat>

@@ -21,7 +21,7 @@ export class AddProductPageComponent implements OnInit {
   public validationMessages = validationMessages;
   public submitted: boolean = false;
   public addProduct: AddProduct;
-  public file: any;
+  public file: any[] = [];
 
   constructor (private fb: FormBuilder,
                private sessionService: SessionService,

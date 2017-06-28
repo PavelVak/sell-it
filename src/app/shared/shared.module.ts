@@ -15,12 +15,14 @@ import { RouterModule } from "@angular/router";
 import { SHARED_ROUTES } from "./shared.routes";
 import { CommonModule } from "@angular/common";
 import { ErrorComponent } from './components/error/error.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   declarations: [
     HeaderComponent,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'sellit-search',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+  public queryString: string = '';
+
+  constructor(private searchService: SearchService ){}
+
+  sendQuery(){
+    this.searchService.sendQuery(this.queryString);
+  }
 }

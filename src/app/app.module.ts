@@ -57,6 +57,7 @@ import {CanActivateAuthGuard} from './core/guards/auth.guard';
 import {CanActivateNoAuthGuard} from './core/guards/no-auth.guard';
 import {EditUserService} from './edit-profile/services/edit-user.service';
 import { ProfileService } from './core/profile.service';
+import { SearchService } from './shared/components/header/search/search.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -120,7 +121,8 @@ type StoreType = {
     CanActivateAuthGuard,
     CanActivateNoAuthGuard,
     EditUserService,
-    ProfileService
+    ProfileService,
+    SearchService,
   ]
 })
 export class AppModule {

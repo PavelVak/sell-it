@@ -23,7 +23,11 @@
           <sellit-error [labelText]="'Photo'"  [inputField]="addProductForm.get('photo')"
                         [inputErrors]="addProductForm.get('photo').errors" [errorDefs]="validationMessages">
             <div class="file-container">
-              Click here to upload the file
+              <!--<span *ngFor="let fileIndex of Object.keys(file)">-->
+                <!--<em>{{file[fileIndex].filename}}</em>-->
+              <!--</span>-->
+              <!--<span *ngIf="file.length == 0;">Click here to upload the file</span>-->
+              <span>Click here to upload the file</span>
               <input type="file" multiple accept="image/*" formControlName="photo" (change)="addPhoto($event)">
             </div>
           </sellit-error>
