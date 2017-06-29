@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Response, URLSearchParams} from '@angular/http';
-import {Item, ItemDetails} from './Items';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Response, URLSearchParams } from '@angular/http';
+import { Item, ItemDetails } from './Items';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {HttpConfigService} from './http-config.service';
+import { HttpConfigService } from './http-config.service';
 
 
 @Injectable()
@@ -29,27 +29,23 @@ export class HttpService {
       params.set('search', <string>title);
     }
 
-
     return this.http.get(this.httpConfigService.API_POSTER, {search: params})
       .map((resp: Response) => {
 
         let itemsList = resp.json().results;
-
         let items: Item[] = [];
         for (let index in itemsList) {
           console.log(itemsList[index]);
           let item = itemsList[index];
-          items.push({id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']});
+          if(item.photo_details[0])
+            items.push({id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']});
         }
         return items;
       });
   }
 
-
-
-  getItem(id: number|string){
+  getItem(id: number|string) {
       this.id = id;
-
       return this.http.get(this.httpConfigService.API_POSTER + this.id)
           .map((resp: Response) => {
 
@@ -67,7 +63,7 @@ export class HttpService {
           });
   }
 
-  loadProductPhoto(photos): Observable<any>{
+  loadProductPhoto(photos): Observable<any> {
     const formData = new FormData();
     for (let photo of photos) {
       formData.append('photo', photo);
@@ -79,7 +75,7 @@ export class HttpService {
       })
   }
 
-  CreateProduct(productData){
+  CreateProduct(productData) {
     return this.http.post(this.httpConfigService.API_POSTER, productData)
       .map((resp) => {
         resp = resp.json();
@@ -87,7 +83,7 @@ export class HttpService {
       })
   }
 
-  updateProduct(productData, productId){
+  updateProduct(productData, productId) {
     return this.http.put(`${this.httpConfigService.API_POSTER}${productId}/`, productData)
       .map((resp) => {
         resp = resp.json();

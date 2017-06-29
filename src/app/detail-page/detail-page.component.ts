@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { ItemDetails } from '../products/services/Items';
 import { SessionService } from '../core/session.service';
@@ -15,7 +15,7 @@ import { validationMessages } from '../shared/components/validationMessages';
   styleUrls: ['./detail-page.component.scss']
 })
 
-export class DetailPageComponent implements AfterViewInit, OnInit{
+export class DetailPageComponent implements AfterViewInit {
   private currentUserId: number;
   private checkedId: boolean;
   private item: ItemDetails;
@@ -33,15 +33,11 @@ export class DetailPageComponent implements AfterViewInit, OnInit{
     private route: ActivatedRoute,
     private sessionService: SessionService,
     private fb: FormBuilder,
-    private httpService: HttpService){
+    private httpService: HttpService) {
     this.route.data.subscribe((item: any) => { this.item = item.itemDetails; });
   }
 
-  ngOnInit(){
-
-  }
-
-  addPhoto(event) {
+  public addPhoto(event) {
     let target = event.target || event.srcElement;
     this.file = target.files;
   }
@@ -58,31 +54,26 @@ export class DetailPageComponent implements AfterViewInit, OnInit{
       let photos = data.map((item) => {
         return item.id
       });
-
       productData['photos'] = photos;
-
       this.editProduct = new AddProduct(productData);
       this.httpService.updateProduct(this.editProduct, this.item.id)
-        .subscribe(data => {
+        .subscribe((data) => {
           this.item = data;
           console.log('test Item', this.item);
         });
 
-
       this.toggleEdit = false;
     });
-
   }
 
-  ngAfterViewInit(){
+  public ngAfterViewInit(){
     this.currentUserId = this.sessionService.currentUser.id;
     this.checkedId = this.userIdChecked();
-    console.log('userId: ',this.currentUserId);
+    console.log('userId: ', this.currentUserId);
     console.log('Item: ', this.item);
   }
 
-
-  toggleEditProduct(){
+  public toggleEditProduct(){
     this.editProductForm = this.fb.group({
       title: [this.item.title, [Validators.required, Validators.minLength(3)]],
       description: [this.item.description, [customLengthValidator(this.descriptionLength)]],
@@ -105,7 +96,7 @@ export class DetailPageComponent implements AfterViewInit, OnInit{
     this.toggleEdit = !this.toggleEdit;
   }
 
-  userIdChecked(){
+  public userIdChecked(){
     return this.currentUserId === this.item.author['id'];
   }
 }

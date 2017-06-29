@@ -15,9 +15,8 @@ export class HttpConfigService {
   public API_PROFILE_PHOTO: string;
   public API_CHANGE_PASSWORD: string;
 
-
   constructor(){
-    this.API_URL = this.API_URL_HOME;
+    this.API_URL = this.API_URL_OFFICE;
 
     this.API_POSTER = this.API_URL + '/api/poster/';
     this.API_SIGNUP = this.API_URL + '/api/signup/';
@@ -28,5 +27,4 @@ export class HttpConfigService {
     this.API_PROFILE_PHOTO = this.API_URL + '/api/profile_photo/';
     this.API_CHANGE_PASSWORD = this.API_URL + '/api/change_password/';
   }
-
 }

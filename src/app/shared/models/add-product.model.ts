@@ -12,5 +12,4 @@ export class AddProduct {
     this.price = data.price;
     this.photos = data.photos;
   }
-
 }

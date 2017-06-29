@@ -1,7 +1,5 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {UserService} from "../../../home-page/user.service";
-
-
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { UserService } from '../../../home-page/user.service';
 
 @Component({
   selector: 'sellit-header-of-page',
@@ -19,12 +17,11 @@ export class HeaderComponent{
 
 
   clickBtn(){
-    this.clickHead.emit({"test":"clickHead"});
-    console.log("Click BTN");
+    this.clickHead.emit({'test':'clickHead'});
   }
 
   public search(){
-    console.log("Search Working!");
-    this.userService.startSearch("testing string for startSearch")
+    console.log('Search Working!');
+    this.userService.startSearch('testing string for startSearch')
   }
 }

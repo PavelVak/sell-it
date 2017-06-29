@@ -1,6 +1,5 @@
 import { Directive, forwardRef, Attribute } from '@angular/core';
-import { NG_VALIDATORS, Validator,
-  Validators,AbstractControl,ValidatorFn } from '@angular/forms';
+import { NG_VALIDATORS, Validator, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Directive({
   selector: '[matchPassword]',
@@ -11,7 +10,7 @@ import { NG_VALIDATORS, Validator,
 export class MatchPasswordDirective implements Validator {
   constructor( @Attribute('matchPassword') public matchPassword: string) {}
 
-  validate(control: AbstractControl): { [key: string]: any } {
+  public validate(control: AbstractControl): { [key: string]: any } {
     let confirmPassword = control.value;
     let password = control.root.get(this.matchPassword);
 

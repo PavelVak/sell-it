@@ -15,15 +15,14 @@ export class ProfileService {
     private sessionService: SessionService,
     private httpConfigService: HttpConfigService){}
 
-
-  myLoadUser():Promise<UserModel>{
+  public myLoadUser(): Promise<UserModel>{
     return this.http.get(this.httpConfigService.API_PROFILE_ME).map((resp: Response) =>{
       let data = resp.json();
       return new UserModel(data.id, data.first_name, data.last_name, data.email, data.username, data.photo);
     }).toPromise();
   }
 
-  myUpdatePhoto(id, photo){
+  public myUpdatePhoto(id, photo){
     const formData = new FormData();
     formData.append('photo', photo);
     return this.http.post(this.httpConfigService.API_PHOTO,  formData)
@@ -32,7 +31,7 @@ export class ProfileService {
         return resp;
       })
       .toPromise()
-      .then(resp => {
+      .then((resp) => {
         return this.myProfileUpdate(id, resp[0]['id'])
       })
   }
@@ -45,7 +44,7 @@ export class ProfileService {
         return resp;
       })
       .toPromise()
-      .then(resp =>{
+      .then((resp) =>{
         console.log(resp);
         return this.myLoadUser();
       });
@@ -59,7 +58,6 @@ export class ProfileService {
         return resp;
       })
       .catch(this.handleError)
-
   }
 
   private handleError(err) {

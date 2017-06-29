@@ -23,7 +23,7 @@ export class ErrorComponent implements OnChanges{
 
     this.errorMessage = '';
     if (errors) {
-      Object.keys(this.errorDefs).some(key => {
+      Object.keys(this.errorDefs).some((key) => {
         if (errors[key]) {
           this.errorMessage = this.errorDefs[key];
           return true;

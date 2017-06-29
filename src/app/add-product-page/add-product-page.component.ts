@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validationMessages } from '../shared/components/validationMessages';
 import { customLengthValidator } from '../shared/directives/customLengthValidator';
 import { customFloatValidator } from '../shared/directives/customFloatValidator';
@@ -35,7 +35,7 @@ export class AddProductPageComponent implements OnInit {
       photo: ['']
     });
 
-    this.addProductForm.get('description').valueChanges.subscribe(value => {
+    this.addProductForm.get('description').valueChanges.subscribe((value) => {
       this.reachLimit = false;
       if (value) {
         this.restOfLength = this.descriptionLength - value.length;
@@ -64,7 +64,7 @@ export class AddProductPageComponent implements OnInit {
     });
   }
 
-  addPhoto(event) {
+  public addPhoto(event) {
     let target = event.target || event.srcElement;
     this.file = target.files;
     console.log(this.file);
@@ -78,7 +78,7 @@ export class AddProductPageComponent implements OnInit {
       price: this.addProductForm.get('price').value,
     };
 
-    this.httpService.loadProductPhoto(this.file).subscribe(data => {
+    this.httpService.loadProductPhoto(this.file).subscribe((data) => {
       let photos = data.map((item) => {
         return item.id
       });
@@ -86,7 +86,7 @@ export class AddProductPageComponent implements OnInit {
       productData['photos'] = photos;
 
       this.addProduct = new AddProduct(productData);
-      this.httpService.CreateProduct(this.addProduct).subscribe(data => console.log(data));
+      this.httpService.CreateProduct(this.addProduct).subscribe((data) => console.log(data));
 
       this.submitted = true;
     });
@@ -107,5 +107,4 @@ export class AddProductPageComponent implements OnInit {
   }
 
 }
-
 
