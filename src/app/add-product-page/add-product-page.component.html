@@ -13,7 +13,7 @@
           </sellit-error>
           <sellit-error [labelText]="'Description'"  [inputField]="addProductForm.get('description')"
                         [inputErrors]="addProductForm.get('description').errors" [errorDefs]="validationMessages">
-            <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+            <textarea [froalaEditor] class="form-control" formControlName="description" placeholder="Description"></textarea>
             <span class="help-block" *ngIf="!reachLimit">{{ this.restOfLength }} characters left</span>
           </sellit-error>
           <sellit-error [labelText]="'Price'"  [inputField]="addProductForm.get('price')"
@@ -22,18 +22,23 @@
           </sellit-error>
           <sellit-error [labelText]="'Photo'"  [inputField]="addProductForm.get('photo')"
                         [inputErrors]="addProductForm.get('photo').errors" [errorDefs]="validationMessages">
-            <div class="file-container">
-              <!--<span *ngFor="let fileIndex of Object.keys(file)">-->
-                <!--<em>{{file[fileIndex].filename}}</em>-->
-              <!--</span>-->
-              <!--<span *ngIf="file.length == 0;">Click here to upload the file</span>-->
-              <span>Click here to upload the file</span>
-              <input type="file" multiple accept="image/*" formControlName="photo" (change)="addPhoto($event)">
+            <div [ngClass]="{'has-error': !fileNames && (addProductForm.get('photo').touched ||
+            addProductForm.get('photo').dirty)}">
+              <div class="file-container form-control">
+                <span *ngIf="!fileNames">Click here to upload the file</span>
+                <span *ngIf="fileNames">{{fileNames}}</span>
+                <input type="file" multiple accept="image/*" formControlName="photo" (change)="addPhoto($event)">
+              </div>
+              <span class="help-block" *ngIf="!fileNames && (addProductForm.get('photo').touched ||
+                                  addProductForm.get('photo').dirty)">
+              {{validationMessages.required}}
+            </span>
             </div>
           </sellit-error>
+
         <div class="form-group btn-group">
           <span>
-             <button class="btn" type="submit" [disabled]="!addProductForm.valid">Submit</button>
+             <button class="btn" type="submit" [disabled]="!addProductForm.valid || !fileNames">Submit</button>
           </span>
           <span>
              <button class="btn" type="button" (click)="resetStateForm()">reset State</button>

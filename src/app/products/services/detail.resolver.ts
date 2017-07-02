@@ -15,6 +15,8 @@ export class ItemDetailResolver implements Resolve<ItemDetails> {
 
     public resolve(route: ActivatedRouteSnapshot): Observable<any>|Promise<any>|any {
         console.log('before get item');
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         return this.httpServ.getItem(route.params.id);
     }
 }

@@ -19,7 +19,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.subscription = this.searchservice.subscribeToQuery()
       .subscribe(queryString => {
         this.queryString = queryString.text;
-        this.httpServ.getItems(0, this.queryString).subscribe((items) => {this.items = items;});
+        this.httpServ.getItems(0, this.queryString).subscribe((items) => {
+          this.items = items;
+          this.offsetStep = 0;
+          this.respFlag = true;
+        });
       });
   }
 
@@ -34,16 +38,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
   offsetStep: number = 0;
   respFlag: boolean = true;
   items: Item[] = [];
+  loading: boolean = false;
 
   addItems() {
-    if (this.respFlag) {
+    if (this.respFlag && !this.loading) {
       let lengthItems: number = this.items.length;
       this.offsetStep += 16;
+      this.loading = true;
       this.httpServ.getItems(this.offsetStep, this.queryString).subscribe((items) => {
+        this.loading = false;
         this.items = this.items.concat(items);
         if (this.items.length === lengthItems) {
           this.respFlag = false;
-        };
+        }
       });
     }
   }

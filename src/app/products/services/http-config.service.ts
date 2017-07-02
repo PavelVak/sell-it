@@ -16,7 +16,7 @@ export class HttpConfigService {
   public API_CHANGE_PASSWORD: string;
 
   constructor(){
-    this.API_URL = this.API_URL_OFFICE;
+    this.API_URL = this.API_URL_HOME;
 
     this.API_POSTER = this.API_URL + '/api/poster/';
     this.API_SIGNUP = this.API_URL + '/api/signup/';

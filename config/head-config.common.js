@@ -28,6 +28,9 @@ module.exports = {
     { rel: 'apple-touch-icon', sizes: '152x152', href: '/assets/icon/apple-icon-152x152.png' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/assets/icon/apple-icon-180x180.png' },
 
+    { rel: 'stylesheet', href: '/assets/font-awesome/css/font-awesome.min.css' },
+    { rel: 'stylesheet', href: '/assets/froala-editor/css/froala_editor.pkgd.min.css' },
+
     /**
      * <link> tags for android web app icons
      */

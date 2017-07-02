@@ -27,7 +27,8 @@ export class DetailPageComponent implements AfterViewInit {
   public validationMessages = validationMessages;
   public submitted: boolean = false;
   public editProduct: AddProduct;
-  public file: any;
+  public files: any;
+  public fileNames: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,12 @@ export class DetailPageComponent implements AfterViewInit {
 
   public addPhoto(event) {
     let target = event.target || event.srcElement;
-    this.file = target.files;
+    this.files = target.files;
+    let filenamesArray: string[] = [];
+    for(let file of this.files){
+      filenamesArray.push(file.name)
+    }
+    this.fileNames = filenamesArray.join(', ');
   }
 
   public formSubmit() {
@@ -50,7 +56,7 @@ export class DetailPageComponent implements AfterViewInit {
       price: this.editProductForm.get('price').value,
     };
 
-    this.httpService.loadProductPhoto(this.file).subscribe(data => {
+    this.httpService.loadProductPhoto(this.files).subscribe(data => {
       let photos = data.map((item) => {
         return item.id
       });
@@ -83,6 +89,7 @@ export class DetailPageComponent implements AfterViewInit {
 
     this.editProductForm.get('description').valueChanges.subscribe(value => {
       this.reachLimit = false;
+      value = value.replace(/<{1}[^<>]{1,}>{1}/g,"").replace(/&nbsp;/g, '').replace(/&amp;/g, ' ');
       if (value) {
         this.restOfLength = this.descriptionLength - value.length;
       } else {

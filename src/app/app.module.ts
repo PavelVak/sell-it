@@ -20,6 +20,9 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
+import "froala-editor/js/froala_editor.pkgd.min.js";
+
+import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -58,6 +61,8 @@ import { CanActivateNoAuthGuard } from './core/guards/no-auth.guard';
 import { EditUserService } from './edit-profile/services/edit-user.service';
 import { ProfileService } from './core/profile.service';
 import { SearchService } from './shared/components/header/search/search.service';
+import { SliderComponent } from './slider/slider.component';
+import { SwiperModule } from 'angular2-useful-swiper';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -86,7 +91,8 @@ type StoreType = {
     NoContentPageComponent,
     RegisterPageComponent,
     AddProductPageComponent,
-    EditProfilePageComponent
+    EditProfilePageComponent,
+    SliderComponent
   ],
   /**
    * Import Angular's modules.
@@ -100,6 +106,9 @@ type StoreType = {
     CookieModule.forRoot(),
     SharedModule,
     ChatModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+    SwiperModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

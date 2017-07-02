@@ -37,8 +37,13 @@ export class HttpService {
         for (let index in itemsList) {
           console.log(itemsList[index]);
           let item = itemsList[index];
-          if(item.photo_details[0])
-            items.push({id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']});
+          if (!item.photo_details[0]){
+            item.photo_details[0] = {
+              id: 0,
+              photo: 'assets/img/no-image.jpg'
+            }
+          }
+          items.push({id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']});
         }
         return items;
       });
@@ -50,6 +55,12 @@ export class HttpService {
           .map((resp: Response) => {
 
               let itemFromResp = resp.json();
+              if (!itemFromResp.photo_details[0]){
+                itemFromResp.photo_details[0] = {
+                  id: 0,
+                  photo: 'assets/img/no-image.jpg'
+                }
+              }
               let item: ItemDetails = new ItemDetails(
                   itemFromResp.id,
                   itemFromResp.title,

@@ -1,0 +1,12 @@
+<swiper [config]="config">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let image of images">
+      <img [src]="image['photo']" alt="image['id']">
+    </div>
+
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>
+  <div class="swiper-button-prev"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
+</swiper>
+

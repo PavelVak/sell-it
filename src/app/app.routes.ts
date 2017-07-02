@@ -11,10 +11,12 @@ import { AddProductPageComponent } from './add-product-page/add-product-page.com
 import { EditProfilePageComponent } from './edit-profile/edit-profile-page.component';
 import { CanActivateAuthGuard } from './core/guards/auth.guard';
 import { CanActivateNoAuthGuard } from  './core/guards/no-auth.guard';
+import { SliderComponent } from './slider/slider.component';
 
 // import { DataResolver } from './app.resolver';
 
 export const ROUTES: Routes = [
+  { path: 'slider', component: SliderComponent},
   { path: '',      component: HomePageComponent},
   { path: 'home',  component: HomePageComponent},
   { path: 'detail/:id', component: DetailPageComponent, resolve: { itemDetails: ItemDetailResolver }},
@@ -24,5 +26,6 @@ export const ROUTES: Routes = [
   { path: 'add-product', component: AddProductPageComponent},
   { path: 'edit-profile', component: EditProfilePageComponent, canActivate: [CanActivateNoAuthGuard]},
   { path: 'user', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'},
-  { path: '**',    component: NoContentPageComponent }
+  { path: '**',    component: NoContentPageComponent },
+
 ];

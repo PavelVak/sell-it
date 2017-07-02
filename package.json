@@ -82,6 +82,8 @@
     "@angular/router": "~4.1.2",
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "~3.0.2",
+    "angular2-froala-wysiwyg": "^2.6.0",
+    "angular2-useful-swiper": "^4.0.5",
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "font-awesome": "~4.7.0",

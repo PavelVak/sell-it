@@ -13,7 +13,7 @@ export class InfiniteScrollDirective {
 
   @HostListener('window:scroll')
   public scrollPage() {
-    //tslint:disable
+    // tslint:disable
     let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop || 0;
 
     if(scrollTop + window.innerHeight + 100 >= document.body.scrollHeight) {
