@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sellit-footer-of-page',
@@ -6,6 +6,4 @@ import {Component} from "@angular/core";
   styleUrls: ['./footer.component.scss']
 })
 
-export class FooterComponent{
-
-}
+export class FooterComponent {}

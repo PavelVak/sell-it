@@ -11,13 +11,18 @@ import { SearchService } from '../../shared/components/header/search/search.serv
 })
 
 export class ProductListComponent implements OnInit, OnDestroy {
-  queryString: any = null;
-  subscription: Subscription;
+  public queryString: any = null;
+  public subscription: Subscription;
+
+  public offsetStep: number = 0;
+  public respFlag: boolean = true;
+  public items: Item[] = [];
+  public loading: boolean = false;
 
   constructor(private httpServ: HttpService,
-              private searchservice: SearchService){
+              private searchservice: SearchService) {
     this.subscription = this.searchservice.subscribeToQuery()
-      .subscribe(queryString => {
+      .subscribe((queryString) => {
         this.queryString = queryString.text;
         this.httpServ.getItems(0, this.queryString).subscribe((items) => {
           this.items = items;
@@ -28,19 +33,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
-    this.httpServ.getItems().subscribe((items) => {this.items = items; console.log(this.items);});
+    this.httpServ.getItems().subscribe((items) => { this.items = items; console.log(this.items); });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  offsetStep: number = 0;
-  respFlag: boolean = true;
-  items: Item[] = [];
-  loading: boolean = false;
-
-  addItems() {
+  public addItems() {
     if (this.respFlag && !this.loading) {
       let lengthItems: number = this.items.length;
       this.offsetStep += 16;

@@ -11,7 +11,7 @@ export class ApiHttp extends Http {
   }
 
   public request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
-    if(this.sessionService.token){
+    if (this.sessionService.token) {
       if (options) {
         options.headers.set('Authorization', 'Token ' + this.sessionService.token);
       } else {

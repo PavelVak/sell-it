@@ -6,15 +6,15 @@ import { Subject } from 'rxjs/Subject';
 export class SearchService {
   private subject = new Subject<any>();
 
-  sendQuery(queryString: string) {
+  public sendQuery(queryString: string) {
     this.subject.next({ text: queryString });
   }
 
-  clearQuery() {
+  public clearQuery() {
     this.subject.next();
   }
 
-  subscribeToQuery(): Observable<any> {
+  public subscribeToQuery(): Observable<any> {
     return this.subject.asObservable();
   }
 }

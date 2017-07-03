@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .product-detail-text{
   P{
     padding: 0 0 9px;
@@ -13,9 +15,9 @@
     font-weight: bold;
 
     &:before{
-      content:  "-";
+      content: "-";
       position: relative;
-      left:     -5px;
+      left: -5px;
     }
   }
 }
@@ -48,11 +50,11 @@
     width: 100%;
   }
 }
-
 .pencil{
   text-align: right;
   display: block;
   font-size: 24px;
   cursor: pointer;
+  color: $primary-color;
 }
 

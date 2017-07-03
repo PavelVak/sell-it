@@ -1,9 +1,10 @@
+// tslint:disable
 export class RegistrationModel {
   public email: string;
   public username: string;
   public password: string;
   public password_confirm: string;
-  constructor(data){
+  constructor(data) {
     this.email = data.email;
     this.username = data.username;
     this.password = data.password;
@@ -12,7 +13,7 @@ export class RegistrationModel {
   }
 }
 
-export class loginModel {
+export class LoginModel {
   constructor( private email: string,
                private password: string ) {}
 }

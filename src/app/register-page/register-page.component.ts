@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MyAuthService } from '../core/myAuth.service';
 import { RegistrationModel } from '../core/auth.model';
 import { validationMessages } from '../shared/components/validationMessages';
@@ -8,10 +8,14 @@ import { Router } from '@angular/router';
 function testValidator(param: any): ValidatorFn {
   return (c: AbstractControl) : {[key: string]: boolean} | null => {
     let parent = c.parent;
-    if(!parent) return null;
+    if (!parent) {
+      return null;
+    }
     let passwordControl = parent.get(param);
     let confirmPassword = c;
-    if (confirmPassword.value !== passwordControl.value) return {noMatch: true};
+    if (confirmPassword.value !== passwordControl.value) {
+      return {noMatch: true};
+    }
     return null;
   };
 }
@@ -30,7 +34,7 @@ const labelsError = {
   styleUrls: ['./register-page.component.scss']
 })
 
-export class RegisterPageComponent implements OnInit{
+export class RegisterPageComponent implements OnInit {
   public validationMessages = validationMessages;
   public registerForm: FormGroup;
   public serverErrors: any[];

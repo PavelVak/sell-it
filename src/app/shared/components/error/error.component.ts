@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'sellit-error',
@@ -6,20 +6,20 @@ import { Component, Input, OnChanges, OnInit} from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 
-export class ErrorComponent implements OnChanges{
+export class ErrorComponent implements OnChanges {
   @Input()
-  labelText: string = '';
+  public labelText: string = '';
   @Input()
-  inputErrors: any;
+  public inputErrors: any;
   @Input()
-  inputField: any;
+  public inputField: any;
   @Input()
-  errorDefs: any;
+  public errorDefs: any;
 
-  errorMessage: string = '';
+  public errorMessage: string = '';
 
-  ngOnChanges(changes:any): void {
-    let errors:any = changes.inputErrors.currentValue;
+  public ngOnChanges(changes: any): void {
+    let errors: any = changes.inputErrors.currentValue;
 
     this.errorMessage = '';
     if (errors) {

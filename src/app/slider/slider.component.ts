@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-  @Input() images: any[];
+  @Input() public images: any[];
 
-  config: Object = {
+  public config: Object = {
     loop: true,
     pagination: '.swiper-pagination',
     paginationClickable: true,

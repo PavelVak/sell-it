@@ -39,7 +39,8 @@ export class AddProductPageComponent implements OnInit {
 
     this.addProductForm.get('description').valueChanges.subscribe((value) => {
       this.reachLimit = false;
-      value = value.replace(/<{1}[^<>]{1,}>{1}/g,"").replace(/&nbsp;/g, '').replace(/&amp;/g, ' ');
+      // tslint:disable
+      value = value.replace(/<{1}[^<>]{1,}>{1}/g,'').replace(/&nbsp;/g, '').replace(/&amp;/g, ' ');
       if (value) {
         this.restOfLength = this.descriptionLength - value.length;
       } else {
@@ -71,8 +72,8 @@ export class AddProductPageComponent implements OnInit {
     let target = event.target || event.srcElement;
     this.files = target.files;
     let filenamesArray: string[] = [];
-    for(let file of this.files){
-      filenamesArray.push(file.name)
+    for (let file of this.files){
+      filenamesArray.push(file.name);
     }
     this.fileNames = filenamesArray.join(', ');
   }
@@ -87,13 +88,13 @@ export class AddProductPageComponent implements OnInit {
 
     this.httpService.loadProductPhoto(this.files).subscribe((data) => {
       let photos = data.map((item) => {
-        return item.id
+        return item.id;
       });
 
       productData['photos'] = photos;
 
       this.addProduct = new AddProduct(productData);
-      this.httpService.CreateProduct(this.addProduct).subscribe((data) => console.log(data));
+      this.httpService.CreateProduct(this.addProduct);
 
       this.submitted = true;
     });
@@ -114,4 +115,3 @@ export class AddProductPageComponent implements OnInit {
   }
 
 }
-

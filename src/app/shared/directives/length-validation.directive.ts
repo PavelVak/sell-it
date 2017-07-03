@@ -7,12 +7,9 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 })
 export class LengthValidDirective implements Validator {
 
-  @Input() MaxLength: any;
+  @Input() public MaxLength: any;
 
-  constructor() {
-  }
-
-  validate(control: AbstractControl): ValidationErrors | any {
+  public validate(control: AbstractControl): ValidationErrors | any {
     if (control.value && control.value.length > this.MaxLength - 1) {
       console.log('invalid');
       return {maxlength: true};

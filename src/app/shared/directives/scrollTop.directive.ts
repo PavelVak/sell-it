@@ -16,7 +16,7 @@ export class ScrollTopDirective {
   }
   @HostListener('window:scroll')
   public scrollTopWindow() {
-    //tslint:disable
+    // tslint:disable
     let scrollTop = document.documentElement.scrollTop || window.pageYOffset ||  document.body.scrollTop || 0;
 
     if (scrollTop + document.body.clientHeight >= document.body.offsetHeight + 150) {

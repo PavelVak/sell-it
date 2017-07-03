@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sellit-product-item',
@@ -6,8 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./product-item.component.scss']
 })
 
-export class ProductItemComponent implements OnInit {
+export class ProductItemComponent {
   @Input() public item = {};
-
-  public ngOnInit () {}
 }

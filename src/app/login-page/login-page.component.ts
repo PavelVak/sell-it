@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { validationMessages } from '../shared/components/validationMessages';
-import { loginModel } from '../core/auth.model';
+import { LoginModel } from '../core/auth.model';
 import { MyAuthService } from '../core/myAuth.service';
 import { Router } from '@angular/router';
 import { SessionService } from '../core/session.service';
@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   constructor (
     private router: Router,
     private fb: FormBuilder,
-    private myAuth: MyAuthService){}
+    private myAuth: MyAuthService) {}
 
   public ngOnInit() {
     this.loginForm = this.fb.group({
@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
 
   public submitLoginForm() {
     let data = this.loginForm.value;
-    this.myAuth.login(new loginModel(data.email, data.password)).subscribe(
+    this.myAuth.login(new LoginModel(data.email, data.password)).subscribe(
       (data) => {
         console.log(`success: ${JSON.stringify(data)}`);
         // this.myAuth.currentUser(data);

@@ -7,21 +7,19 @@ import { UserService } from '../../../home-page/user.service';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent{
+export class HeaderComponent {
   @Input()
   public titleHead;
   @Output()
   public clickHead: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService) {}
 
-
-  clickBtn(){
-    this.clickHead.emit({'test':'clickHead'});
+  public clickBtn() {
+    this.clickHead.emit({test: 'clickHead'});
   }
 
-  public search(){
-    console.log('Search Working!');
-    this.userService.startSearch('testing string for startSearch')
+  public search() {
+    this.userService.startSearch('testing string for startSearch');
   }
 }

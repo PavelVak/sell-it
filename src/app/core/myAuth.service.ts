@@ -6,7 +6,6 @@ import { CookieService } from 'ngx-cookie';
 import { SessionService } from './session.service';
 import { HttpConfigService } from '../products/services/http-config.service';
 
-
 @Injectable()
 export class MyAuthService {
   public user: UserModel = new UserModel(null, '', '', '', '', null);
@@ -55,14 +54,13 @@ export class MyAuthService {
     return this.http.post(this.httpConfigService.API_LOGOUT, {})
       .map((resp) => resp.json())
       .catch(this.handleError);
-
   }
 
-  public isLogin(){
+  public isLogin() {
     return !!this.sessionService.token;
   }
 
-  public currentUser(data: any){
+  public currentUser(data: any) {
     this.user.id = data.id;
     this.user.firstName = data.firstName || '';
     this.user.lastName = data.lastName || '';
@@ -70,7 +68,6 @@ export class MyAuthService {
     this.user.username = data.username;
    // this.isLogin = true;
   }
-
 
   /*handle any errors from the APi*/
   private handleError(err) {

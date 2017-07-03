@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyAuthService } from '../../../../core/myAuth.service';
 import { Router } from '@angular/router';
-import { SessionService}  from '../../../../core/session.service';
+import { SessionService }  from '../../../../core/session.service';
 import { UserModel } from '../../../../core/auth.model';
 import { HttpConfigService } from '../../../../products/services/http-config.service';
 
@@ -11,11 +11,11 @@ import { HttpConfigService } from '../../../../products/services/http-config.ser
   styleUrls: [ './user-panel.component.scss' ]
 })
 
-export class UserPanelComponent implements OnInit{
+export class UserPanelComponent implements OnInit {
 
   public toggleMenu = false;
   public isLogin: boolean = false;
-  private user: UserModel;
+  public user: UserModel;
   public userPhotoPath: string;
 
   constructor(
@@ -24,7 +24,7 @@ export class UserPanelComponent implements OnInit{
     private router: Router,
     private httpConfigService: HttpConfigService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.userPhotoPath = this.httpConfigService.API_URL;
     if (this.sessionService.token && localStorage.getItem('user')) {
       let user = JSON.parse(localStorage.getItem('user'));

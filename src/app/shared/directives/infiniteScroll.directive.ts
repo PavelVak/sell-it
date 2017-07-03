@@ -7,9 +7,7 @@ import { Directive, Output, EventEmitter, HostListener } from '@angular/core';
 
 export class InfiniteScrollDirective {
 
-  constructor(){}
-
-  @Output() endOfPage: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public endOfPage: EventEmitter<any> = new EventEmitter<any>();
 
   @HostListener('window:scroll')
   public scrollPage() {

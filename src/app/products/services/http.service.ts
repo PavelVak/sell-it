@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { HttpConfigService } from './http-config.service';
 
-
 @Injectable()
 export class HttpService {
 
@@ -17,16 +16,16 @@ export class HttpService {
 
   constructor(
     private http: Http,
-    private httpConfigService: HttpConfigService){ }
+    private httpConfigService: HttpConfigService) { }
 
-  getItems(offset: number|string = 0, title: string = null): Observable<Item[]> {
+  public getItems(offset: number|string = 0, title: string = null): Observable<Item[]> {
     this.offset = offset;
     let params: URLSearchParams = new URLSearchParams();
     params.set('limit', this.limit);
-    params.set('offset', <string>this.offset);
+    params.set('offset', <string> this.offset);
 
-    if(title) {
-      params.set('search', <string>title);
+    if (title) {
+      params.set('search', <string> title);
     }
 
     return this.http.get(this.httpConfigService.API_POSTER, {search: params})
@@ -37,29 +36,29 @@ export class HttpService {
         for (let index in itemsList) {
           console.log(itemsList[index]);
           let item = itemsList[index];
-          if (!item.photo_details[0]){
+          if (!item.photo_details[0]) {
             item.photo_details[0] = {
               id: 0,
               photo: 'assets/img/no-image.jpg'
-            }
+            };
           }
-          items.push({id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']});
+          items.push( {id: item.id, title: item.title, imageSrc: item.photo_details[0]['photo']} );
         }
         return items;
       });
   }
 
-  getItem(id: number|string) {
+  public getItem(id: number|string) {
       this.id = id;
       return this.http.get(this.httpConfigService.API_POSTER + this.id)
           .map((resp: Response) => {
 
               let itemFromResp = resp.json();
-              if (!itemFromResp.photo_details[0]){
+              if (!itemFromResp.photo_details[0]) {
                 itemFromResp.photo_details[0] = {
                   id: 0,
                   photo: 'assets/img/no-image.jpg'
-                }
+                };
               }
               let item: ItemDetails = new ItemDetails(
                   itemFromResp.id,
@@ -74,7 +73,7 @@ export class HttpService {
           });
   }
 
-  loadProductPhoto(photos): Observable<any> {
+  public loadProductPhoto(photos): Observable<any> {
     const formData = new FormData();
     for (let photo of photos) {
       formData.append('photo', photo);
@@ -83,24 +82,24 @@ export class HttpService {
       .map((resp) => {
         resp = resp.json();
         return resp;
-      })
+      });
   }
 
-  CreateProduct(productData) {
+  public CreateProduct(productData) {
     return this.http.post(this.httpConfigService.API_POSTER, productData)
       .map((resp) => {
         resp = resp.json();
         return resp;
-      })
+      });
   }
 
-  updateProduct(productData, productId) {
+  public updateProduct(productData, productId) {
     return this.http.put(`${this.httpConfigService.API_POSTER}${productId}/`, productData)
       .map((resp) => {
         resp = resp.json();
-        console.log('test resp',resp);
+        console.log('test resp', resp);
         return new ItemDetails(resp['id'], resp['title'], resp['description'], resp['author'],
-          resp['price'], resp['photo_details'])
-      })
+          resp['price'], resp['photo_details']);
+      });
   }
 }

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {SessionService} from "../../core/session.service";
+import { SessionService } from '../../core/session.service';
 
 @Injectable()
 export class EditUserService {
-  url = 'http://fe-kurs.light-it.loc:38000';
-
+  public url = 'http://fe-kurs.light-it.loc:38000';
 
   constructor (private http: Http, private sessionService: SessionService) {}
 
@@ -27,7 +26,7 @@ export class EditUserService {
     // debugger;
     let data = {user: this.sessionService.currentUser.id, photo: photoId};
     return this.http.post(this.url + '/api/profile_photo/', data)
-      .map(resp => {
+      .map((resp) => {
         return resp.json();
       })
       .catch(this.handleError);

@@ -41,7 +41,17 @@ p{
     font-size: 24px;
   }
 }
-
+.fr-toolbar{
+  border-top: 5px solid $primary-color;
+}
+.fr-toolbar.fr-top,
+.fr-box.fr-basic.fr-top .fr-wrapper{
+  box-shadow: 0 1px 3px rgba(0,179,190,.9), 0 1px 1px 1px rgba(0,179,190,.9);
+}
+.fr-box .fr-counter{
+  border: none;
+  color: $primary-color;
+}
 
 
 

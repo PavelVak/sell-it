@@ -7,7 +7,7 @@ export class CanActivateAuthGuard implements CanActivate {
 
   constructor(private router: Router, private sessionService: SessionService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.sessionService.token) {
       // logged in so return true
       return true;
@@ -17,4 +17,3 @@ export class CanActivateAuthGuard implements CanActivate {
     return false;
   }
 }
-

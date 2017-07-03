@@ -9,9 +9,9 @@ import { SearchService } from './search.service';
 export class SearchComponent {
   public queryString: string = '';
 
-  constructor(private searchService: SearchService ){}
+  constructor(private searchService: SearchService ) {}
 
-  sendQuery(){
+  public sendQuery() {
     this.searchService.sendQuery(this.queryString);
   }
 }

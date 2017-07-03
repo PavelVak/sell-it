@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { validationMessages } from '../shared/components/validationMessages';
-import { EditUserService } from "./services/edit-user.service";
+import { EditUserService } from './services/edit-user.service';
 import { ProfileService } from '../core/profile.service';
 
 function PasswordValidator(param: any): ValidatorFn {
@@ -10,7 +10,7 @@ function PasswordValidator(param: any): ValidatorFn {
     if (!parent) { return null; }
     let passwordControl = parent.get(param);
     let confirmPassword = c;
-    if (confirmPassword.value !== passwordControl.value) return {noMatch: true};
+    if (confirmPassword.value !== passwordControl.value) { return {noMatch: true}; }
     return null;
   };
 }
@@ -22,7 +22,6 @@ function PasswordValidator(param: any): ValidatorFn {
 //   }
 //   return { 'match': true};
 // }
-
 
 @Component({
   selector: 'sellit-edit-profile-page',
@@ -38,7 +37,7 @@ export class EditProfilePageComponent implements OnInit {
   public submittedChangePhoto: boolean = false;
   public submittedChangePassword: boolean = false;
   public serverErrors: any[];
-  file: any;
+  public file: any;
 
   private labelsError = {
     new_password1: 'New Password',
@@ -50,7 +49,7 @@ export class EditProfilePageComponent implements OnInit {
                private profileService: ProfileService) {}
 
   public ngOnInit() {
-    this.profileService.myLoadUser().then(data => {
+    this.profileService.myLoadUser().then((data) => {
       console.log(data);
       return this.currentUser = data;
     });
@@ -63,28 +62,26 @@ export class EditProfilePageComponent implements OnInit {
       passwordGroup: this.fb.group({
         oldPassword: ['', [Validators.required]],
         password: ['', [Validators.required]],
-        confirmPassword: ['',[Validators.required, PasswordValidator('password')]]
+        confirmPassword: ['', [Validators.required, PasswordValidator('password')]]
       })
     });
   }
 
-  addPhoto(event) {
+  public addPhoto(event) {
     let target = event.target || event.srcElement;
     this.file = target.files;
-
   }
 
   public formPhotoSubmit() {
     this.submittedChangePhoto = true;
     this.profileService.myUpdatePhoto(this.currentUser.id, this.file[0])
-      .then(data => console.log('data from component: ', data));
+      .then((data) => console.log('data from component: ', data));
 
     // this.editUserService.updatePhoto(this.file[0]).subscribe((data) => {
     //   let photoId = data[0]['id'];
     //   this.editUserService.updateUserPhoto(photoId).subscribe((data) => data);
     //   return data;
     // });
-
   }
 
   public formPasswordSubmit() {
@@ -94,19 +91,17 @@ export class EditProfilePageComponent implements OnInit {
       old_password: this.changePasswordForm.get('passwordGroup.oldPassword').value
     };
     this.profileService.myChangePassword(data).subscribe(
-      data => { this.submittedChangePassword = true},
+      (data) => { this.submittedChangePassword = true; },
       (error) => {
         this.serverErrors = [];
         Object.keys(error).map((item) => {
           return this.serverErrors.push({key: this.labelsError[item], value: error[item].join(' ')});
         });
         console.log(this.serverErrors);
-
       });
-
   }
 
-  toggleState(value){
-    this.changePhoto = value == 'photo'
+  public toggleState(value) {
+    this.changePhoto = value === 'photo';
   }
 }

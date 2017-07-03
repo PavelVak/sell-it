@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ItemDetails } from '../products/services/Items';
 import { SessionService } from '../core/session.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,10 +16,7 @@ import { validationMessages } from '../shared/components/validationMessages';
 })
 
 export class DetailPageComponent implements AfterViewInit {
-  private currentUserId: number;
-  private checkedId: boolean;
-  private item: ItemDetails;
-  private toggleEdit: boolean = false;
+
   public descriptionLength: number = 20;
   public restOfLength: number = this.descriptionLength;
   public reachLimit: boolean = false;
@@ -29,6 +26,11 @@ export class DetailPageComponent implements AfterViewInit {
   public editProduct: AddProduct;
   public files: any;
   public fileNames: string;
+
+  public currentUserId: number;
+  public checkedId: boolean;
+  public item: ItemDetails;
+  public toggleEdit: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,8 +44,8 @@ export class DetailPageComponent implements AfterViewInit {
     let target = event.target || event.srcElement;
     this.files = target.files;
     let filenamesArray: string[] = [];
-    for(let file of this.files){
-      filenamesArray.push(file.name)
+    for (let file of this.files) {
+      filenamesArray.push(file.name);
     }
     this.fileNames = filenamesArray.join(', ');
   }
@@ -56,30 +58,29 @@ export class DetailPageComponent implements AfterViewInit {
       price: this.editProductForm.get('price').value,
     };
 
-    this.httpService.loadProductPhoto(this.files).subscribe(data => {
+    this.httpService.loadProductPhoto(this.files).subscribe((data) => {
       let photos = data.map((item) => {
-        return item.id
+        return item.id;
       });
       productData['photos'] = photos;
       this.editProduct = new AddProduct(productData);
       this.httpService.updateProduct(this.editProduct, this.item.id)
-        .subscribe((data) => {
+        .subscribe( (data: ItemDetails) => {
           this.item = data;
           console.log('test Item', this.item);
         });
-
       this.toggleEdit = false;
     });
   }
 
-  public ngAfterViewInit(){
+  public ngAfterViewInit() {
     this.currentUserId = this.sessionService.currentUser.id;
     this.checkedId = this.userIdChecked();
     console.log('userId: ', this.currentUserId);
     console.log('Item: ', this.item);
   }
 
-  public toggleEditProduct(){
+  public toggleEditProduct() {
     this.editProductForm = this.fb.group({
       title: [this.item.title, [Validators.required, Validators.minLength(3)]],
       description: [this.item.description, [customLengthValidator(this.descriptionLength)]],
@@ -87,9 +88,10 @@ export class DetailPageComponent implements AfterViewInit {
       photo: ['']
     });
 
-    this.editProductForm.get('description').valueChanges.subscribe(value => {
+    this.editProductForm.get('description').valueChanges.subscribe((value) => {
       this.reachLimit = false;
-      value = value.replace(/<{1}[^<>]{1,}>{1}/g,"").replace(/&nbsp;/g, '').replace(/&amp;/g, ' ');
+      // tslint:disable
+      value = value.replace(/<{1}[^<>]{1,}>{1}/g,'').replace(/&nbsp;/g, '').replace(/&amp;/g, ' ');
       if (value) {
         this.restOfLength = this.descriptionLength - value.length;
       } else {
@@ -103,7 +105,7 @@ export class DetailPageComponent implements AfterViewInit {
     this.toggleEdit = !this.toggleEdit;
   }
 
-  public userIdChecked(){
+  public userIdChecked() {
     return this.currentUserId === this.item.author['id'];
   }
 }

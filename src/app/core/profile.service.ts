@@ -13,16 +13,16 @@ export class ProfileService {
   constructor(
     private http: Http,
     private sessionService: SessionService,
-    private httpConfigService: HttpConfigService){}
+    private httpConfigService: HttpConfigService) {}
 
-  public myLoadUser(): Promise<UserModel>{
-    return this.http.get(this.httpConfigService.API_PROFILE_ME).map((resp: Response) =>{
+  public myLoadUser(): Promise<UserModel> {
+    return this.http.get(this.httpConfigService.API_PROFILE_ME).map((resp: Response) => {
       let data = resp.json();
       return new UserModel(data.id, data.first_name, data.last_name, data.email, data.username, data.photo);
     }).toPromise();
   }
 
-  public myUpdatePhoto(id, photo){
+  public myUpdatePhoto(id, photo) {
     const formData = new FormData();
     formData.append('photo', photo);
     return this.http.post(this.httpConfigService.API_PHOTO,  formData)
@@ -32,11 +32,11 @@ export class ProfileService {
       })
       .toPromise()
       .then((resp) => {
-        return this.myProfileUpdate(id, resp[0]['id'])
-      })
+        return this.myProfileUpdate(id, resp[0]['id']);
+      });
   }
 
-  public myProfileUpdate(userId, photoId){
+  public myProfileUpdate(userId, photoId) {
     let data = {user: userId, photo: photoId};
     return this.http.post(this.httpConfigService.API_PROFILE_PHOTO, data)
       .map((resp) => {
@@ -44,20 +44,20 @@ export class ProfileService {
         return resp;
       })
       .toPromise()
-      .then((resp) =>{
+      .then((resp) => {
         console.log(resp);
         return this.myLoadUser();
       });
   }
 
-  public myChangePassword(data){
+  public myChangePassword(data) {
     return this.http.post(this.httpConfigService.API_CHANGE_PASSWORD, data)
       .map((resp) => {
         resp = resp.json();
         console.log(resp);
         return resp;
       })
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
   private handleError(err) {

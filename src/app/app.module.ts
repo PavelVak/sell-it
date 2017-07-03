@@ -20,8 +20,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
-import "froala-editor/js/froala_editor.pkgd.min.js";
-
+import 'froala-editor/js/froala_editor.pkgd.min.js';
 import { FroalaEditorModule, FroalaViewModule } from 'angular2-froala-wysiwyg';
 
 /*

@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Product } from './product.model';
 import { Observable } from 'rxjs/Observable';
 import { ProductService } from './product.service';
-import { HttpService } from "./http.service";
-import { ItemDetails } from "./Items";
+import { HttpService } from './http.service';
+import { ItemDetails } from './Items';
 
 @Injectable()
 export class ItemDetailResolver implements Resolve<ItemDetails> {

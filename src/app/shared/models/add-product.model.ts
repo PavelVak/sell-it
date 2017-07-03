@@ -5,7 +5,7 @@ export class AddProduct {
   public price: number;
   public photos: any;
 
-  constructor(data){
+  constructor(data) {
     this.title = data.title;
     this.description = data.description;
     this.author = data.author;

@@ -9,7 +9,6 @@ import { ScrollTopDirective } from './directives/scrollTop.directive';
 import { InfiniteScrollDirective } from './directives/infiniteScroll.directive';
 import { LengthValidDirective } from './directives/length-validation.directive';
 import { FloatValidDirective } from './directives/float-validator.directive';
-import { MatchPasswordDirective } from './directives/match-password.directive';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ErrorComponent } from './components/error/error.component';
@@ -31,7 +30,6 @@ import { FormsModule } from '@angular/forms';
     InfiniteScrollDirective,
     LengthValidDirective,
     FloatValidDirective,
-    MatchPasswordDirective,
     ErrorComponent
   ],
   exports: [
@@ -45,7 +43,6 @@ import { FormsModule } from '@angular/forms';
     InfiniteScrollDirective,
     LengthValidDirective,
     FloatValidDirective,
-    MatchPasswordDirective
   ]
 })
 export class SharedModule {

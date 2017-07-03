@@ -1,4 +1,4 @@
-import { Directive} from '@angular/core';
+import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 @Directive({
@@ -7,7 +7,7 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 })
 export class FloatValidDirective implements Validator {
 
-  validate(control: AbstractControl): ValidationErrors | any {
+  public validate(control: AbstractControl): ValidationErrors | any {
     console.log('jih');
     if (!isNaN(parseFloat(control.value)) && isFinite(control.value)) {
       console.log('invalid');
